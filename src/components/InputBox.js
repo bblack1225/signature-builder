@@ -1,4 +1,5 @@
 import { Box, Divider, Tab, TabList, TabPanel, TabPanels, Tabs, theme } from "@chakra-ui/react";
+import InfoForm from "./InfoForm";
 import LogoForm from "./LogoForm";
 
 const InputBox = () => {
@@ -34,6 +35,7 @@ const InputBox = () => {
             <TabPanel>
               <LogoForm />
               <Divider />
+              <InfoForm />
             </TabPanel>
             <TabPanel>
               <p>two!</p>

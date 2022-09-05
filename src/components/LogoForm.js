@@ -1,3 +1,4 @@
+import { ViewIcon } from "@chakra-ui/icons";
 import { Box, Center, Flex, Input, Stack, Text } from "@chakra-ui/react";
 import { useDropzone } from 'react-dropzone'
 
@@ -17,9 +18,10 @@ const LogoForm = () => {
     );
 
     return (
-      <Flex w="100%" p={4} justifyContent='space-between' alignItems='center'>
-        <Box w='30%'>LOGO</Box>
-        <Box w='70%'>
+      <Flex w="100%" p={2} justifyContent='space-between' alignItems='center'>
+        <Box w='5%'><ViewIcon /></Box>
+        <Box w='30%' textAlign='center'>LOGO</Box>
+        <Box w='60%'>
           <Center border="1px" borderColor="gray.200" borderRadius={20} bg='white' h='50px' textAlign='center'>
             <Box {...getRootProps({ className: 'dropzone' })}>
               <Input {...getInputProps()} size='lg' />
@@ -30,6 +32,7 @@ const LogoForm = () => {
             </aside> */}
           </Center>
         </Box>
+        <Box w='5%' />
       </Flex>
     );
 }
