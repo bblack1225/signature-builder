@@ -32,13 +32,15 @@ const InputBox = () => {
             </Tab>
           </TabList>
           <TabPanels>
-            <TabPanel>
+            <TabPanel minH='600px'>
               <LogoForm />
               <Divider />
-              <InfoForm />
+              <InfoForm type="typeB" />
             </TabPanel>
-            <TabPanel>
-              <p>two!</p>
+            <TabPanel minH='600px'>
+              <LogoForm />
+              <Divider />
+              <InfoForm type="typeC" />
             </TabPanel>
           </TabPanels>
         </Tabs>

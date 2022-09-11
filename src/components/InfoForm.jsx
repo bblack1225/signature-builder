@@ -3,11 +3,12 @@ import { useRef, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { InfoType } from '../constants/InfoType';
 import { DeleteIcon, AddIcon, ViewIcon, PhoneIcon } from '@chakra-ui/icons';
+import { useEffect } from 'react';
+import ImageDropzone from './ImageDropzone';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteColumn, insertColumn, updateColumn } from '../redux/signatureImgBSlice';
 
-
-function InfoForm(){
-
-const [infos, setInfos] = useState([
+const typeBColumn = [
   {
     id: 1,
     type: InfoType.NORMAL,
@@ -49,26 +50,79 @@ const [infos, setInfos] = useState([
     columnName: '公司官網',
     img: '',
     icon: InfoType.WEBSITE.icon,
+  }
+];
+
+const typeCColumn = [
+  {
+    id: 1,
+    type: InfoType.NORMAL,
+    columnName: '姓名',
+    img: '',
+    icon: InfoType.NORMAL.icon,
   },
-]);
+  {
+    id: 2,
+    type: InfoType.NORMAL,
+    columnName: '職稱',
+    img: '',
+    icon: InfoType.NORMAL.icon,
+  },
+  {
+    id: 3,
+    type: InfoType.PHONE,
+    columnName: '手機',
+    img: '',
+    icon: InfoType.PHONE.icon,
+  },
+  {
+    id: 4,
+    type: InfoType.PHONE,
+    columnName: '公司電話',
+    img: '',
+    icon: InfoType.PHONE.icon,
+  },
+  {
+    id: 5,
+    type: InfoType.EMAIL,
+    columnName: 'Email',
+    img: '',
+    icon: InfoType.EMAIL.icon,
+  }
+];
+
+
+export default function InfoForm({ type }){
+
+const { typeBCol, typeCCol } = useSelector((state) => state.signatureImg);
+const dispatch = useDispatch();
+
+const [infos, setInfos] = useState([]);
 
 const [insertForm, setInsertForm] = useState({
     columnName:'',
     columnType:''
 })
 
+
 const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
   accept: {
     'image/jpeg': [],
     'image/png': [],
   },
-  maxFiles:1
+  maxFiles:1,
+  multiple: false
 });
 
 const { isOpen, onOpen, onClose } = useDisclosure();
 
 const initialRef = useRef(null);
 const finalRef = useRef(null);
+
+useEffect(() => {
+  const column = type === 'typeB' ? typeBCol : typeCCol;
+  setInfos(column);
+}, [typeBCol, typeCCol]);
 
 const files = acceptedFiles.map((file) => {
     console.log(file)
@@ -80,7 +134,8 @@ const files = acceptedFiles.map((file) => {
 });
 
 const handleDeleteColumn = (id) => {
-    setInfos((prev) => prev.filter(info => info.id !== id));
+    const data = {id, type};
+    dispatch(deleteColumn(data))
 }
 
 const handleInsertForm = () => {
@@ -94,7 +149,8 @@ const handleInsertForm = () => {
         img:'',
         icon:colInfo.icon
     }
-    setInfos((prev) => [...prev, form]);
+    const data = { type, form};
+    dispatch(insertColumn(data))
     setInsertForm({
       columnName: '',
       columnType: '',
@@ -116,10 +172,17 @@ const handleInsertForm = () => {
               alignItems="center"
             >
               <Box w="5%">{info.icon}</Box>
-              <Box w="30%" textAlign="center">
-                {info.columnName}
+              <Box w="40%" textAlign="center">
+                {/* {info.columnName} */}
+                <Input
+                  bg="white"
+                  borderRadius={20}
+                  placeholder={info.columnName}
+                  type="text"
+                  disabled={info.icon === InfoType.NORMAL.icon}
+                />
               </Box>
-              <Box w="60%">
+              <Box w="40%">
                 <Center
                   border="1px"
                   borderColor="gray.200"
@@ -128,12 +191,13 @@ const handleInsertForm = () => {
                   h="50px"
                   textAlign="center"
                 >
-                  <Box {...getRootProps({ className: 'dropzone' })}>
-                    <Input {...getInputProps()} size="lg" />
-                    <Text>Upload Here</Text>
-                    {/* <Text>{files}</Text> */}
-                  </Box>
-                  {/* <aside>
+                  <ImageDropzone />
+                  {/* <Box {...getRootProps({ className: 'dropzone' })}>
+                      <Input {...getInputProps()} size="md" />
+                      <Text>Upload Here</Text>
+                      <Text>{files}</Text>
+                    </Box>
+                    <aside>
                     <ul>{files}</ul>
                   </aside> */}
                 </Center>
@@ -159,7 +223,6 @@ const handleInsertForm = () => {
           >
             新增欄位
           </Button>
-          <Input type='file' />
         </Flex>
       </Flex>
       <Modal
@@ -218,5 +281,3 @@ const handleInsertForm = () => {
     </>
   );
 };
-
-export default InfoForm;

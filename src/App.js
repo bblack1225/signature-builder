@@ -8,7 +8,7 @@ function App() {
       <Box
         p="30"
         justifyContent={{ lg: 'space-around' }}
-        mt="100px"
+        mt="50px"
         minH="500px"
         display={{ lg: 'flex' }}
       >
