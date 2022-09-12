@@ -2,99 +2,17 @@ import { Box, Button, Center, Divider, Flex, FormControl, FormLabel, IconButton,
 import { useRef, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { InfoType } from '../constants/InfoType';
-import { DeleteIcon, AddIcon, ViewIcon, PhoneIcon } from '@chakra-ui/icons';
+import { DeleteIcon, AddIcon, ViewIcon, PhoneIcon, CheckIcon } from '@chakra-ui/icons';
 import { useEffect } from 'react';
 import ImageDropzone from './ImageDropzone';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteColumn, insertColumn, updateColumn } from '../redux/signatureImgBSlice';
-
-const typeBColumn = [
-  {
-    id: 1,
-    type: InfoType.NORMAL,
-    columnName: '姓名',
-    img: '',
-    icon: InfoType.NORMAL.icon,
-  },
-  {
-    id: 2,
-    type: InfoType.NORMAL,
-    columnName: '職稱',
-    img: '',
-    icon: InfoType.NORMAL.icon,
-  },
-  {
-    id: 3,
-    type: InfoType.PHONE,
-    columnName: '手機',
-    img: '',
-    icon: InfoType.PHONE.icon,
-  },
-  {
-    id: 4,
-    type: InfoType.PHONE,
-    columnName: '公司電話',
-    img: '',
-    icon: InfoType.PHONE.icon,
-  },
-  {
-    id: 5,
-    type: InfoType.EMAIL,
-    columnName: 'Email',
-    img: '',
-    icon: InfoType.EMAIL.icon,
-  },
-  {
-    id: 6,
-    type: InfoType.WEBSITE,
-    columnName: '公司官網',
-    img: '',
-    icon: InfoType.WEBSITE.icon,
-  }
-];
-
-const typeCColumn = [
-  {
-    id: 1,
-    type: InfoType.NORMAL,
-    columnName: '姓名',
-    img: '',
-    icon: InfoType.NORMAL.icon,
-  },
-  {
-    id: 2,
-    type: InfoType.NORMAL,
-    columnName: '職稱',
-    img: '',
-    icon: InfoType.NORMAL.icon,
-  },
-  {
-    id: 3,
-    type: InfoType.PHONE,
-    columnName: '手機',
-    img: '',
-    icon: InfoType.PHONE.icon,
-  },
-  {
-    id: 4,
-    type: InfoType.PHONE,
-    columnName: '公司電話',
-    img: '',
-    icon: InfoType.PHONE.icon,
-  },
-  {
-    id: 5,
-    type: InfoType.EMAIL,
-    columnName: 'Email',
-    img: '',
-    icon: InfoType.EMAIL.icon,
-  }
-];
+import { deleteColumn, insertColumn, updateColumn } from '../redux/signatureImgSlice';
 
 
-export default function InfoForm({ type }){
+export default function InfoForm(){
 
 const { typeBCol, typeCCol } = useSelector((state) => state.signatureImg);
+const { type } = useSelector((state) => state.signatureType);
 const dispatch = useDispatch();
 
 const [infos, setInfos] = useState([]);
@@ -104,34 +22,16 @@ const [insertForm, setInsertForm] = useState({
     columnType:''
 })
 
-
-const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
-  accept: {
-    'image/jpeg': [],
-    'image/png': [],
-  },
-  maxFiles:1,
-  multiple: false
-});
-
 const { isOpen, onOpen, onClose } = useDisclosure();
 
 const initialRef = useRef(null);
 const finalRef = useRef(null);
 
 useEffect(() => {
-  const column = type === 'typeB' ? typeBCol : typeCCol;
+  const column = type === 'B' ? typeBCol : typeCCol;
   setInfos(column);
-}, [typeBCol, typeCCol]);
+}, [type, typeBCol, typeCCol]);
 
-const files = acceptedFiles.map((file) => {
-    console.log(file)
-  return (
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-    </li>
-  );
-});
 
 const handleDeleteColumn = (id) => {
     const data = {id, type};
@@ -191,15 +91,7 @@ const handleInsertForm = () => {
                   h="50px"
                   textAlign="center"
                 >
-                  <ImageDropzone />
-                  {/* <Box {...getRootProps({ className: 'dropzone' })}>
-                      <Input {...getInputProps()} size="md" />
-                      <Text>Upload Here</Text>
-                      <Text>{files}</Text>
-                    </Box>
-                    <aside>
-                    <ul>{files}</ul>
-                  </aside> */}
+                  <ImageDropzone colWidth={200} colHeight={50} />
                 </Center>
               </Box>
               <Box w="5%">
@@ -214,15 +106,27 @@ const handleInsertForm = () => {
             <Divider />
           </Box>
         ))}
-        <Flex justifyContent="flex-end" mt="30px" alignItems="center">
-          <Button
-            rightIcon={<AddIcon />}
-            colorScheme="blue"
-            variant="ghost"
-            onClick={onOpen}
-          >
-            新增欄位
-          </Button>
+        <Flex justifyContent="space-between" mt="30px" alignItems="center">
+          <Box>
+            <Button
+              rightIcon={<AddIcon />}
+              colorScheme="blue"
+              variant="ghost"
+              onClick={onOpen}
+            >
+              新增欄位
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              rightIcon={<CheckIcon />}
+              colorScheme="blue"
+              variant="ghost"
+              onClick={onOpen}
+            >
+              製作簽名檔
+            </Button>
+          </Box>
         </Flex>
       </Flex>
       <Modal

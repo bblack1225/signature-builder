@@ -91,8 +91,8 @@ const initialState = {
 ]
 };
 
-export const signatureImgBSlice = createSlice({
-  name: 'signatureImg',
+export const signatureImgSlice = createSlice({
+  name:'signatureImg',
   initialState,
   reducers: {
     insertColumn: (state, action) => {
@@ -132,6 +132,6 @@ export const signatureImgBSlice = createSlice({
   }
 });
 
-export const { insertColumn, deleteColumn, updateColumn } = signatureImgBSlice.actions;
+export const { insertColumn, deleteColumn, updateColumn } = signatureImgSlice.actions;
 
-export default signatureImgBSlice.reducer;
+export default signatureImgSlice.reducer;

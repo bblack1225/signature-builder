@@ -3,7 +3,9 @@ import { useCallback } from "react";
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 
-function ImageDropzone(){
+const defaultWidth = 200;
+
+function ImageDropzone({ colHeight, colWidth}){
 
     const [selectedImage, setSelectImage] = useState("");
 
@@ -19,11 +21,22 @@ function ImageDropzone(){
     })
 
     return (
-      <Box {...getRootProps({ className: 'dropzone' })} w="200px" h="50px">
-          <Input {...getInputProps()} />
-        {selectedImage && <Image src={selectedImage} alt="image" />}
-        {/* :<Box mt='20px'><Text>Upload or Drag here</Text></Box> */}
-      </Box>
+      <Flex
+        {...getRootProps({ className: 'dropzone' })}
+        w={selectedImage ? colWidth : defaultWidth}
+        h={colHeight}
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Input {...getInputProps()} />
+        <Box>
+          {selectedImage ? (
+            <Image src={selectedImage} alt="image" />
+          ) : (
+            <Text fontSize="sm">Upload or Drag here</Text>
+          )}
+        </Box>
+      </Flex>
     );
 }
 

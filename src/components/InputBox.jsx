@@ -1,20 +1,22 @@
 import { Box, Divider, Tab, TabList, TabPanel, TabPanels, Tabs, theme } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+import { setSignatureType } from "../redux/signatureTypeSlice";
 import InfoForm from "./InfoForm";
 import LogoForm from "./LogoForm";
 
 const InputBox = () => {
 
-    const theme = {
-        colors: {
-            blue: {
-                700: ''
-            }
-        }
+    const { type } = useSelector((state) => state.signatureType);
+    const dispatch = useDispatch();
+    const handleTabChange = (index) => {
+      console.log('index', index)
+      const type = index == 0 ? 'B' : 'C';
+      dispatch(setSignatureType(type));
     }
 
     return (
       <Box w={[300,400,500]} bg="gray.50" boxShadow="md" mb={{md: 10}} m={{md: '0 auto'}}>
-        <Tabs size="lg">
+        <Tabs size="lg" onChange={handleTabChange}>
           <TabList bg="#e6edf5" borderRadius="10px">
             <Tab
               w="50%"
@@ -35,12 +37,12 @@ const InputBox = () => {
             <TabPanel minH='600px'>
               <LogoForm />
               <Divider />
-              <InfoForm type="typeB" />
+              <InfoForm />
             </TabPanel>
             <TabPanel minH='600px'>
               <LogoForm />
               <Divider />
-              <InfoForm type="typeC" />
+              <InfoForm />
             </TabPanel>
           </TabPanels>
         </Tabs>
