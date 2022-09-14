@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import ImageDropzone from './ImageDropzone';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteColumn, insertColumn, updateColumn } from '../redux/signatureImgSlice';
+import { createSignature } from '../redux/createSignatureSlice';
 
 
 export default function InfoForm(){
@@ -28,6 +29,7 @@ const initialRef = useRef(null);
 const finalRef = useRef(null);
 
 useEffect(() => {
+  console.log('in useEffect')
   const column = type === 'B' ? typeBCol : typeCCol;
   setInfos(column);
 }, [type, typeBCol, typeCCol]);
@@ -58,8 +60,16 @@ const handleInsertForm = () => {
     onClose();
 }
 
+// 左側input框值改變
+const handleColValueChange = (e, id) => {
+  const data = { form: { value: e.target.value}, id, type };
+  dispatch(updateColumn(data));
+}
 
-// TODO modal打開後 背景顏色沒變
+const handleCreateSignature = () => {
+  dispatch(createSignature())
+}
+
   return (
     <>
       <Flex flexDir="column">
@@ -80,6 +90,7 @@ const handleInsertForm = () => {
                   placeholder={info.columnName}
                   type="text"
                   disabled={info.icon === InfoType.NORMAL.icon}
+                  onChange={(e) =>handleColValueChange(e, info.id)}
                 />
               </Box>
               <Box w="40%">
@@ -91,7 +102,11 @@ const handleInsertForm = () => {
                   h="50px"
                   textAlign="center"
                 >
-                  <ImageDropzone colWidth={200} colHeight={50} />
+                  <ImageDropzone
+                    colWidth={200}
+                    colHeight={50}
+                    colId={info.id}
+                  />
                 </Center>
               </Box>
               <Box w="5%">
@@ -99,7 +114,7 @@ const handleInsertForm = () => {
                   bg="transparent"
                   aria-label="Delete button"
                   icon={<DeleteIcon />}
-                  onClick={() => handleDeleteColumn(info.id)}
+                  onClick={(e) => handleDeleteColumn(info.id)}
                 />
               </Box>
             </Flex>
@@ -122,7 +137,7 @@ const handleInsertForm = () => {
               rightIcon={<CheckIcon />}
               colorScheme="blue"
               variant="ghost"
-              onClick={onOpen}
+              onClick={handleCreateSignature}
             >
               製作簽名檔
             </Button>

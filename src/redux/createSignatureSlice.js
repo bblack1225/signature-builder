@@ -8,16 +8,16 @@ export const createSignatureSlice = createSlice({
     name: 'createSignature',
     initialState,
     reducers: {
-        create: (state) => {
+        createSignature: (state) => {
            state.isCreate = true;
         },
-        complete:(state) => {
+        completeSignature:(state) => {
             state.isCreate = false;
         },
     }
 })
 
 
-export const { create, complete } = createSignatureSlice.actions;
+export const { createSignature, completeSignature } = createSignatureSlice.actions;
 
 export default createSignatureSlice.reducer;
