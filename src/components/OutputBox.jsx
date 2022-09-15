@@ -9,6 +9,8 @@ import { InfoType } from "../constants/InfoType";
 import { completeSignature } from "../redux/createSignatureSlice";
 
 export default function OutputBox(){
+    const imageBURL = 'https://i.imgur.com/Yk2soxS.png';
+    const imageCURL = '';
     const { typeBCol, typeCCol, logoForm } = useSelector((state) => state.signatureImg);
     const { isCreate } = useSelector((state) => state.createSignature);
     const { type } = useSelector((state) => state.signatureType);
@@ -92,7 +94,7 @@ export default function OutputBox(){
                         <Tr>
                           <Td borderBottom="none" p="0" valign="top">
                             <Link href="https://www.infolink-group.com/">
-                              <Image boxSize="90px" src={logoForm.img} />
+                              <Image boxSize="90px" src={type === 'B' ? imageBURL : imageCURL} />
                             </Link>
                           </Td>
                           <Td

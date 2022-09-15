@@ -1,16 +1,13 @@
 import { ViewIcon } from "@chakra-ui/icons";
 import { Box, Center, Flex, Input, Stack, Text } from "@chakra-ui/react";
 import { useDropzone } from 'react-dropzone'
+import { useSelector } from "react-redux";
 import ImageDropzone from "./ImageDropzone";
 
 const LogoForm = () => {
 
-    const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
-      accept: {
-        'image/jpeg': [],
-        'image/png': [],
-      },
-    });
+    const { type } = useSelector((state) => state.signatureType);
+    const imageBURL = 'https://i.imgur.com/Yk2soxS.png';
 
     return (
       <Flex w="100%" p={2} justifyContent='space-between' alignItems='center'>
@@ -19,10 +16,10 @@ const LogoForm = () => {
           <Input borderRadius='20px' placeholder="官網連結" />
         </Box>
         <Box w='40%'>
-          <Center border="1px" borderColor="gray.200" borderRadius={20} bg='white' h='50px' textAlign='center'>
-            <Box {...getRootProps({ className: 'dropzone' })}>
-              <ImageDropzone colWidth={50} colHeight={50} />
-            </Box>
+          <Center border="1px" borderColor="gray.200" borderRadius={20} bg='gray300' h='50px' textAlign='center'>
+            {/* <Box > */}
+              {/* <Input colWidth={50} colHeight={50} /> */}
+            {/* </Box> */}
           </Center>
         </Box>
         <Box w='5%' />
