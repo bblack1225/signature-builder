@@ -79,6 +79,7 @@ export default function OutputBox(){
         mt={{ md: '50px', sm: '50px' }}
         border="1px solid #ccc"
       >
+        Test auto deploy
         {isCreate ? (
           <Flex justifyContent="center" alignItems="center" h="30%">
             <BeatLoader color="#1B4079" />
