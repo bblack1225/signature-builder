@@ -1,12 +1,11 @@
-import { Box, Divider, Tab, TabList, TabPanel, TabPanels, Tabs, theme } from "@chakra-ui/react";
-import { useDispatch, useSelector } from "react-redux";
+import { Box, Divider, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { useDispatch } from "react-redux";
 import { setSignatureType } from "../redux/signatureTypeSlice";
 import InfoForm from "./InfoForm";
 import LogoForm from "./LogoForm";
 
 const InputBox = () => {
 
-    const { type } = useSelector((state) => state.signatureType);
     const dispatch = useDispatch();
     const handleTabChange = (index) => {
       console.log('index', index)

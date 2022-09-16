@@ -1,8 +1,7 @@
-import { Box, Button, Center, Divider, Flex, FormControl, FormLabel, IconButton, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Stack, Text, useDisclosure } from '@chakra-ui/react';
+import { Box, Button, Center, Divider, Flex, FormControl, IconButton, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, useDisclosure } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
-import { useDropzone } from 'react-dropzone';
 import { InfoType } from '../constants/InfoType';
-import { DeleteIcon, AddIcon, ViewIcon, PhoneIcon, CheckIcon } from '@chakra-ui/icons';
+import { DeleteIcon, AddIcon, CheckIcon } from '@chakra-ui/icons';
 import { useEffect } from 'react';
 import ImageDropzone from './ImageDropzone';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,7 +28,6 @@ const initialRef = useRef(null);
 const finalRef = useRef(null);
 
 useEffect(() => {
-  console.log('in useEffect')
   const column = type === 'B' ? typeBCol : typeCCol;
   setInfos(column);
 }, [type, typeBCol, typeCCol]);
@@ -45,12 +43,13 @@ const handleInsertForm = () => {
     const colInfo = Object.values(InfoType).find(type => type.value === insertForm.columnType);
     
     const form = {
-        id: new Date(),
-        type:insertForm.columnType,
-        columnName:insertForm.columnName,
-        img:'',
-        icon:colInfo.icon
-    }
+      id: new Date(),
+      type: insertForm.columnType,
+      columnName: insertForm.columnName,
+      img: '',
+      icon: colInfo.icon,
+      value: colInfo?.linkVal
+    };
     const data = { type, form};
     dispatch(insertColumn(data))
     setInsertForm({
@@ -62,9 +61,9 @@ const handleInsertForm = () => {
 
 // 左側input框值改變
 const handleColValueChange = (e, id) => {
-  const data = { form: { value: e.target.value}, id, type };
+  const data = { form: { value: e.target.value }, id, type };
   dispatch(updateColumn(data));
-}
+};
 
 const handleCreateSignature = () => {
   dispatch(createSignature())
@@ -90,7 +89,9 @@ const handleCreateSignature = () => {
                   placeholder={info.columnName}
                   type="text"
                   disabled={info.icon === InfoType.NORMAL.icon}
-                  onChange={(e) =>handleColValueChange(e, info.id)}
+                  onChange={(e) =>
+                    handleColValueChange(e, info.id)
+                  }
                 />
               </Box>
               <Box w="40%">

@@ -25,7 +25,7 @@ const initialState = {
       columnName: '手機',
       img: '',
       icon: InfoType.PHONE.icon,
-      value: null,
+      value: '0929023456',
     },
     {
       id: 4,
@@ -33,7 +33,7 @@ const initialState = {
       columnName: '公司電話',
       img: '',
       icon: InfoType.PHONE.icon,
-      value: null,
+      value: '886-2-27163123',
     },
     {
       id: 5,
@@ -41,7 +41,7 @@ const initialState = {
       columnName: 'Email',
       img: '',
       icon: InfoType.EMAIL.icon,
-      value: null,
+      value: 'serena.chooi@infolink-group.com',
     },
     {
       id: 6,
@@ -49,7 +49,7 @@ const initialState = {
       columnName: '公司官網',
       img: '',
       icon: InfoType.WEBSITE.icon,
-      value: null,
+      value: 'https://www.infolink-group.com',
     },
   ],
   typeCCol: [
@@ -131,8 +131,8 @@ export const signatureImgSlice = createSlice({
         };
       } else {
         const index = state.typeCCol.findIndex((col) => col.id === id);
-        state.typeBCol[index] = {
-          ...state.typeBCol[index],
+        state.typeCCol[index] = {
+          ...state.typeCCol[index],
           ...form,
         };
       }
