@@ -8,8 +8,8 @@ import { InfoType } from "../constants/InfoType";
 import { completeSignature } from "../redux/createSignatureSlice";
 
 export default function OutputBox(){
-    const myVal = '8px';
-    const mlVal = '3px';
+    const myBVal = '8px';
+    const myCVal = '6px';
 
     const imageBURL = 'https://i.imgur.com/Yk2soxS.png';
     const imageCURL = 'https://i.imgur.com/U531d5c.png';
@@ -17,8 +17,6 @@ export default function OutputBox(){
     const { isCreate } = useSelector((state) => state.createSignature);
     const { type } = useSelector((state) => state.signatureType);
     const dispatch = useDispatch();
-
-    console.log('typeBCol', typeBCol);
 
     const [copyValue, setCopyValue] = useState(type === 'B' ? typeBCol : typeCCol);
     const [isCopied, setIsCopied] = useState(false);
@@ -60,7 +58,6 @@ export default function OutputBox(){
     }, [type, typeBCol, typeCCol]);
 
     const getLinkValue= (type, value) => {
-      console.log(`type:-${type} value:${value}`);
       if(type === InfoType.PHONE){
         return `tel:${value}`
       }else if(type === InfoType.EMAIL){
@@ -88,7 +85,7 @@ export default function OutputBox(){
                         w="250px"
                         src={info.img}
                         key={index}
-                        my={myVal}
+                        my={myBVal}
                         ml="10px"
                       />
                     ) : (
@@ -96,7 +93,7 @@ export default function OutputBox(){
                         href={getLinkValue(info.type, info.value)}
                         key={index}
                       >
-                        <Image w="250px" src={info.img} my={myVal} ml="7px" />
+                        <Image w="250px" src={info.img} my={myBVal} ml="7px" />
                       </Link>
                     )
                   )}
@@ -116,29 +113,34 @@ export default function OutputBox(){
               <Tr>
                 <Td borderBottom="none" p="0" valign="top" bg="#fff">
                   <Link href="https://www.infolink-group.com/">
-                    <Image src={imageCURL} mr="5px" w="250px" />
-                    <Image src="https://i.imgur.com/ANllioi.png" mr="5px" />
+                    <Image src={imageCURL} w="300px" ml="0px" />
                   </Link>
-                </Td>
-                <Td borderLeft="1px solid #ccc" p="0" borderBottom="none">
-                  {copyValue.map((info, index) =>
-                    info.type === InfoType.NORMAL ? (
-                      <Image
-                        w="250px"
-                        src={info.img}
-                        key={index}
-                        my={myVal}
-                        ml="10px"
-                      />
-                    ) : (
-                      <Link
-                        href={getLinkValue(info.type, info.value)}
-                        key={index}
-                      >
-                        <Image w="250px" src={info.img} my={myVal} ml="7px" />
-                      </Link>
-                    )
-                  )}
+                  <Flex>
+                    <Box w="18px">
+                      <Image w="20px" src={'https://i.imgur.com/ANllioi.png'} />
+                    </Box>
+                    <Box ml={myCVal}>
+                      {copyValue.map((info, index) =>
+                        info.type === InfoType.NORMAL ? (
+                          <Image
+                            w="250px"
+                            src={info.img}
+                            key={index}
+                            my={myCVal}
+                          />
+                        ) : (
+                          <Link
+                            href={getLinkValue(info.type, info.value)}
+                            key={index}
+                          >
+                            <Image w="250px" src={info.img} my={myCVal} />
+                          </Link>
+                        )
+                      )}
+                    </Box>
+                  </Flex>
+                  {/* </Td> */}
+                  {/* <Td borderLeft="1px solid #ccc" p="0" borderBottom="none"> */}
                 </Td>
               </Tr>
             </Tbody>

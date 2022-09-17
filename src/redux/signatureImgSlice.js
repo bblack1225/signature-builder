@@ -56,7 +56,7 @@ const initialState = {
     {
       id: 1,
       type: InfoType.NORMAL,
-      columnName: '姓名',
+      columnName: '職稱',
       img: '',
       icon: InfoType.NORMAL.icon,
       value: null,
@@ -64,7 +64,7 @@ const initialState = {
     {
       id: 2,
       type: InfoType.NORMAL,
-      columnName: '職稱',
+      columnName: '姓名',
       img: '',
       icon: InfoType.NORMAL.icon,
       value: null,

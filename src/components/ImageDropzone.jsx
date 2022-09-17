@@ -12,7 +12,6 @@ function ImageDropzone({ colHeight, colWidth, colId}){
     const clientId = 'a67c5935c9a0611';
 
     const { type } = useSelector((state) => state.signatureType);
-
     const dispatch = useDispatch();
 
     const [selectedImage, setSelectImage] = useState("");
@@ -38,7 +37,7 @@ function ImageDropzone({ colHeight, colWidth, colId}){
               };
               dispatch(updateColumn(data));
           });
-     }, []);
+     }, [type]);
 
     const { getRootProps, getInputProps } = useDropzone({ 
         onDrop,
