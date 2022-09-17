@@ -5,7 +5,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BeatLoader } from "react-spinners";
 import { InfoType } from "../constants/InfoType";
-import { completeSignature } from "../redux/createSignatureSlice";
+import { completeSignature, selectIsCreate } from "../redux/createSignatureSlice";
+import { selectTypeBCol, selectTypeCCol } from "../redux/signatureImgSlice";
+import { selectSignatureType } from "../redux/signatureTypeSlice";
 
 export default function OutputBox(){
     const myBVal = '8px';
@@ -13,12 +15,14 @@ export default function OutputBox(){
 
     const imageBURL = 'https://i.imgur.com/Yk2soxS.png';
     const imageCURL = 'https://i.imgur.com/U531d5c.png';
-    const { typeBCol, typeCCol, logoForm } = useSelector((state) => state.signatureImg);
-    const { isCreate } = useSelector((state) => state.createSignature);
-    const { type } = useSelector((state) => state.signatureType);
+    const typeBCol = useSelector(selectTypeBCol);
+    const typeCCol = useSelector(selectTypeCCol);
+    const isCreate = useSelector(selectIsCreate);
+    const type = useSelector(selectSignatureType);
+    
     const dispatch = useDispatch();
 
-    const [copyValue, setCopyValue] = useState(type === 'B' ? typeBCol : typeCCol);
+    const [copyValue, setCopyValue] = useState([]);
     const [isCopied, setIsCopied] = useState(false);
     const [isComplete, setIsComplete] = useState(false);
     const contentRef = useRef(null);
@@ -43,19 +47,19 @@ export default function OutputBox(){
       sel.removeAllRanges();
     }
 
-    useEffect(() => {
-      const timer = setTimeout(() => {
-          dispatch(completeSignature());
-          setIsComplete(true)
-        }, 1500)
+    // useEffect(() => {
+    //   const timer = setTimeout(() => {
+    //       dispatch(completeSignature());
+    //       setIsComplete(true)
+    //     }, 1500)
 
-      return () => clearTimeout(timer);
-    },[isCreate]);
+    //   return () => clearTimeout(timer);
+    // },[isCreate]);
 
     useEffect(() => {
       const column = type === 'B' ? typeBCol : typeCCol;
       setCopyValue(column);
-    }, [type, typeBCol, typeCCol]);
+    }, [type]);
 
     const getLinkValue= (type, value) => {
       if(type === InfoType.PHONE){

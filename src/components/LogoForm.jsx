@@ -1,10 +1,11 @@
 import { ViewIcon } from "@chakra-ui/icons";
 import { Box, Center, Flex, Image, Input, Stack, Text } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
+import { selectSignatureType } from "../redux/signatureTypeSlice";
 
 const LogoForm = () => {
 
-  const { type } = useSelector((state) => state.signatureType);
+  const type = useSelector(selectSignatureType);
 
     const imageBURL = 'https://i.imgur.com/Yk2soxS.png';
     const imageCURL = 'https://i.imgur.com/U531d5c.png';
