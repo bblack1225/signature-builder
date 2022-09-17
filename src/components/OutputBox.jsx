@@ -158,11 +158,11 @@ export default function OutputBox(){
         mt={{ md: '50px', sm: '50px' }}
         border="1px solid #ccc"
       >
-        {isCreate ? (
-          <Flex justifyContent="center" alignItems="center" h="30%">
+        {/* {isCreate ? ( */}
+          {/* <Flex justifyContent="center" alignItems="center" h="30%">
             <BeatLoader color="#1B4079" />
-          </Flex>
-        ) : isComplete ? (
+          </Flex> */}
+        {/* ) : isComplete ? ( */}
           <>
             <Table cellPadding="0" ref={contentRef}>
               <Tbody direction="row" height="150px" p="10px">
@@ -181,9 +181,9 @@ export default function OutputBox(){
               {/* </Tooltip> */}
             </Box>
           </>
-        ) : (
+        {/* ) : (
           <Text>Not Upload</Text>
-        )}
+        )} */}
       </Box>
     );
 }

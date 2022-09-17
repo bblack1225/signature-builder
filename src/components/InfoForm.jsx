@@ -7,12 +7,13 @@ import ImageDropzone from './ImageDropzone';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteColumn, insertColumn, updateColumn } from '../redux/signatureImgSlice';
 import { createSignature } from '../redux/createSignatureSlice';
-
+import { BeatLoader } from 'react-spinners';
 
 export default function InfoForm(){
 
 const { typeBCol, typeCCol } = useSelector((state) => state.signatureImg);
 const { type } = useSelector((state) => state.signatureType);
+const { isUploading, isCreate} = useSelector((state) => state.createSignature);
 const dispatch = useDispatch();
 
 const [infos, setInfos] = useState([]);
@@ -71,80 +72,87 @@ const handleCreateSignature = () => {
 
   return (
     <>
-      <Flex flexDir="column">
-        {infos.map((info) => (
-          <Box key={info.id}>
-            <Flex
-              w="100%"
-              p={2}
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Box w="5%">{info.icon}</Box>
-              <Box w="40%" textAlign="center">
-                {/* {info.columnName} */}
-                <Input
-                  bg="white"
-                  borderRadius={20}
-                  placeholder={info.columnName}
-                  type="text"
-                  disabled={info.icon === InfoType.NORMAL.icon}
-                  onChange={(e) =>
-                    handleColValueChange(e, info.id)
-                  }
-                />
-              </Box>
-              <Box w="40%">
-                <Center
-                  border="1px"
-                  borderColor="gray.200"
-                  borderRadius={20}
-                  bg="white"
-                  h="50px"
-                  textAlign="center"
-                >
-                  <ImageDropzone
-                    colWidth={200}
-                    colHeight={50}
-                    colId={info.id}
+      {/* {isCreate ? (
+        <>
+          {console.log('@@@@@')}
+          <Flex justifyContent="center" alignItems="center" h="30%" w="100%">
+            <BeatLoader color="#1B4079" />
+          </Flex>
+        </>
+      ) : ( */}
+        <Flex flexDir="column">
+          {infos.map((info) => (
+            <Box key={info.id}>
+              <Flex
+                w="100%"
+                p={2}
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Box w="5%">{info.icon}</Box>
+                <Box w="40%" textAlign="center">
+                  {/* {info.columnName} */}
+                  <Input
+                    bg="white"
+                    borderRadius={20}
+                    placeholder={info.columnName}
+                    type={info.type === InfoType.PHONE ? 'tel' : 'text'}
+                    disabled={info.icon === InfoType.NORMAL.icon}
+                    onChange={(e) => handleColValueChange(e, info.id)}
                   />
-                </Center>
-              </Box>
-              <Box w="5%">
-                <IconButton
-                  bg="transparent"
-                  aria-label="Delete button"
-                  icon={<DeleteIcon />}
-                  onClick={(e) => handleDeleteColumn(info.id)}
-                />
-              </Box>
-            </Flex>
-            <Divider />
-          </Box>
-        ))}
-        <Flex justifyContent="space-between" mt="30px" alignItems="center">
-          <Box>
-            <Button
-              rightIcon={<AddIcon />}
-              colorScheme="blue"
-              variant="ghost"
-              onClick={onOpen}
-            >
-              新增欄位
-            </Button>
-          </Box>
-          <Box>
-            <Button
-              rightIcon={<CheckIcon />}
-              colorScheme="blue"
-              variant="ghost"
-              onClick={handleCreateSignature}
-            >
-              製作簽名檔
-            </Button>
-          </Box>
+                </Box>
+                <Box w="40%">
+                  <Center
+                    border="1px"
+                    borderColor="gray.200"
+                    borderRadius={20}
+                    bg="white"
+                    h="50px"
+                    textAlign="center"
+                  >
+                    <ImageDropzone
+                      colWidth={200}
+                      colHeight={50}
+                      colId={info.id}
+                    />
+                  </Center>
+                </Box>
+                <Box w="5%">
+                  <IconButton
+                    bg="transparent"
+                    aria-label="Delete button"
+                    icon={<DeleteIcon />}
+                    onClick={(e) => handleDeleteColumn(info.id)}
+                  />
+                </Box>
+              </Flex>
+              <Divider />
+            </Box>
+          ))}
+          <Flex justifyContent="space-between" mt="30px" alignItems="center">
+            <Box>
+              <Button
+                rightIcon={<AddIcon />}
+                colorScheme="blue"
+                variant="ghost"
+                onClick={onOpen}
+              >
+                新增欄位
+              </Button>
+            </Box>
+            <Box>
+              <Button
+                rightIcon={<CheckIcon />}
+                colorScheme="blue"
+                variant="ghost"
+                onClick={handleCreateSignature}
+              >
+                製作簽名檔
+              </Button>
+            </Box>
+          </Flex>
         </Flex>
-      </Flex>
+      {/* )} */}
       <Modal
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}

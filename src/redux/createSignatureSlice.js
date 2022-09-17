@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-    isCreate: false
+    isUploading: false,
+    isCreate: false,
 }
 
 export const createSignatureSlice = createSlice({
@@ -14,10 +15,17 @@ export const createSignatureSlice = createSlice({
         completeSignature:(state) => {
             state.isCreate = false;
         },
+        uploadSignatureImage: (state) => {
+            state.isUploading = true;
+        },
+        completeUploadSignatureImage: (state) => {
+            state.isUploading = false;
+        }
     }
 })
 
 
-export const { createSignature, completeSignature } = createSignatureSlice.actions;
+export const { createSignature, completeSignature, uploadSignatureImage, completeUploadSignatureImage } =
+  createSignatureSlice.actions;
 
 export default createSignatureSlice.reducer;

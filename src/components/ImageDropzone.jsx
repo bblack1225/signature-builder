@@ -3,49 +3,53 @@ import { useCallback } from "react";
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useDispatch, useSelector } from "react-redux";
+import { completeUploadSignatureImage, createSignature, uploadSignatureImage } from "../redux/createSignatureSlice";
 import { updateColumn } from "../redux/signatureImgSlice";
 
 const defaultWidth = 200;
 
-function ImageDropzone({ colHeight, colWidth, colId}){
+function ImageDropzone({ colHeight, colWidth, colId}) {
+  const clientId = 'a67c5935c9a0611';
 
-    const clientId = 'a67c5935c9a0611';
+  const { type } = useSelector((state) => state.signatureType);
+  const dispatch = useDispatch();
 
-    const { type } = useSelector((state) => state.signatureType);
-    const dispatch = useDispatch();
+  const [selectedImage, setSelectImage] = useState('');
 
-    const [selectedImage, setSelectImage] = useState("");
+  const onDrop = useCallback((acceptedFiles) => {
+      dispatch(createSignature());
+      const formData = new FormData();
+      formData.append('image', acceptedFiles[0]);
+      fetch('https://api.imgur.com/3/image/', {
+        method: 'POST',
+        headers: {
+          Authorization: `Client-ID ${clientId}`,
+        },
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          const img = res.data.link;
+          setSelectImage(img);
+          const data = {
+            form: { img },
+            type,
+            id: colId,
+          };
+          dispatch(updateColumn(data));
+        });
+        dispatch(completeUploadSignatureImage());
+    },
+    [type]
+  );
 
-     const onDrop = useCallback((acceptedFiles) => {
-        const formData = new FormData();
-        formData.append('image', acceptedFiles[0]);
-        fetch('https://api.imgur.com/3/image/', {
-          method: 'POST',
-          headers: {
-            Authorization: `Client-ID ${clientId}`,
-          },
-          body: formData,
-        })
-          .then((res) => res.json())
-          .then((res) => {
-            const img = res.data.link;
-            setSelectImage(img);
-              const data = {
-                form: { img },
-                type,
-                id: colId,
-              };
-              dispatch(updateColumn(data));
-          });
-     }, [type]);
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    multiple: false,
+  });
 
-    const { getRootProps, getInputProps } = useDropzone({ 
-        onDrop,
-        multiple: false
-    })
-
-    return (
-      <>
+  return (
+    <>
         <Flex
           {...getRootProps({ className: 'dropzone' })}
           w={selectedImage ? colWidth : defaultWidth}
@@ -54,7 +58,7 @@ function ImageDropzone({ colHeight, colWidth, colId}){
           justifyContent="center"
         >
           <Input {...getInputProps()} />
-          <Flex w='100%' justifyContent='center'>
+          <Flex w="100%" justifyContent="center">
             {selectedImage ? (
               <Image
                 src={selectedImage}
@@ -66,8 +70,8 @@ function ImageDropzone({ colHeight, colWidth, colId}){
             )}
           </Flex>
         </Flex>
-      </>
-    );
+    </>
+  );
 }
 
 export default ImageDropzone;
