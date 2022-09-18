@@ -150,7 +150,4 @@ export const signatureImgSlice = createSlice({
 export const { insertColumn, deleteColumn, updateColumn, updateLogoColumn } =
   signatureImgSlice.actions;
 
-export const selectTypeBCol = (state) => state.signatureImg.typeBCol;
-export const selectTypeCCol = (state) => state.signatureImg.typeCCol;
-
 export default signatureImgSlice.reducer;

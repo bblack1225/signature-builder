@@ -16,6 +16,4 @@ export const signatureTypeSlice = createSlice({
 
 export const { setSignatureType } = signatureTypeSlice.actions;
 
-export const selectSignatureType = (state) => state.signatureType.type;
-
 export default signatureTypeSlice.reducer;

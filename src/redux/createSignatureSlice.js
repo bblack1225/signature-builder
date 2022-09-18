@@ -28,7 +28,4 @@ export const createSignatureSlice = createSlice({
 export const { createSignature, completeSignature, uploadSignatureImage, completeUploadSignatureImage } =
   createSignatureSlice.actions;
 
-export const selectIsUpload = (state) => state.createSignature.isUploading;
-export const selectIsCreate = (state) => state.createSignature.isCreate;
-
 export default createSignatureSlice.reducer;

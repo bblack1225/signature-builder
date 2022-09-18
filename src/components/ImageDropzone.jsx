@@ -3,16 +3,15 @@ import { useCallback } from "react";
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useDispatch, useSelector } from "react-redux";
-import { completeUploadSignatureImage, createSignature } from "../redux/createSignatureSlice";
+import { completeUploadSignatureImage, createSignature, uploadSignatureImage } from "../redux/createSignatureSlice";
 import { updateColumn } from "../redux/signatureImgSlice";
-import { selectSignatureType } from "../redux/signatureTypeSlice";
 
 const defaultWidth = 200;
 
 function ImageDropzone({ colHeight, colWidth, colId}) {
   const clientId = 'a67c5935c9a0611';
 
-  const type = useSelector(selectSignatureType);
+  const { type } = useSelector((state) => state.signatureType);
   const dispatch = useDispatch();
 
   const [selectedImage, setSelectImage] = useState('');

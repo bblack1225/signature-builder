@@ -5,19 +5,15 @@ import { DeleteIcon, AddIcon, CheckIcon } from '@chakra-ui/icons';
 import { useEffect } from 'react';
 import ImageDropzone from './ImageDropzone';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteColumn, insertColumn, selectTypeBCol, selectTypeCCol, updateColumn } from '../redux/signatureImgSlice';
-import { createSignature, selectIsCreate, selectIsUpload } from '../redux/createSignatureSlice';
+import { deleteColumn, insertColumn, updateColumn } from '../redux/signatureImgSlice';
+import { createSignature } from '../redux/createSignatureSlice';
 import { BeatLoader } from 'react-spinners';
-import { selectSignatureType } from '../redux/signatureTypeSlice';
 
 export default function InfoForm(){
 
-const typeBCol = useSelector(selectTypeBCol);
-const typeCCol = useSelector(selectTypeCCol);
-const type = useSelector(selectSignatureType);
-const isUploading = useSelector(selectIsUpload);
-const isCreate = useSelector(selectIsCreate);
-
+const { typeBCol, typeCCol } = useSelector((state) => state.signatureImg);
+const { type } = useSelector((state) => state.signatureType);
+const { isUploading, isCreate} = useSelector((state) => state.createSignature);
 const dispatch = useDispatch();
 
 const [infos, setInfos] = useState([]);
