@@ -13,13 +13,12 @@ export default function OutputBox(){
 
     const imageBURL = 'https://i.imgur.com/Yk2soxS.png';
     const imageCURL = 'https://i.imgur.com/U531d5c.png';
-    const { typeBCol, typeCCol, logoForm } = useSelector((state) => state.signatureImg);
+    const { typeBCol, typeCCol } = useSelector((state) => state.signatureImg);
     const { isCreate } = useSelector((state) => state.createSignature);
     const { type } = useSelector((state) => state.signatureType);
     const dispatch = useDispatch();
 
     const [copyValue, setCopyValue] = useState(type === 'B' ? typeBCol : typeCCol);
-    const [isCopied, setIsCopied] = useState(false);
     const [isComplete, setIsComplete] = useState(false);
     const contentRef = useRef(null);
 
@@ -47,7 +46,7 @@ export default function OutputBox(){
       const timer = setTimeout(() => {
           dispatch(completeSignature());
           setIsComplete(true)
-        }, 1500)
+        }, 1000)
 
       return () => clearTimeout(timer);
     },[isCreate]);
@@ -158,11 +157,11 @@ export default function OutputBox(){
         mt={{ md: '50px', sm: '50px' }}
         border="1px solid #ccc"
       >
-        {/* {isCreate ? ( */}
-          {/* <Flex justifyContent="center" alignItems="center" h="30%">
+        {isCreate ? (
+           <Flex justifyContent="center" alignItems="center" h="30%">
             <BeatLoader color="#1B4079" />
-          </Flex> */}
-        {/* ) : isComplete ? ( */}
+          </Flex> 
+        ) : isComplete ? (
           <>
             <Table cellPadding="0" ref={contentRef}>
               <Tbody direction="row" height="150px" p="10px">
@@ -181,9 +180,9 @@ export default function OutputBox(){
               {/* </Tooltip> */}
             </Box>
           </>
-        {/* ) : (
+         ) : (
           <Text>Not Upload</Text>
-        )} */}
+        )}
       </Box>
     );
 }
