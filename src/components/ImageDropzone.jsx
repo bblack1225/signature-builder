@@ -1,9 +1,9 @@
-import { Box, Flex, Image, Input, Text } from "@chakra-ui/react";
+import { Alert, Box, Flex, Image, Input, Text } from "@chakra-ui/react";
 import { useCallback } from "react";
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useDispatch, useSelector } from "react-redux";
-import { completeUploadSignatureImage, createSignature, uploadSignatureImage } from "../redux/createSignatureSlice";
+import { completeUploadSignatureImage, createSignature } from "../redux/createSignatureSlice";
 import { updateColumn } from "../redux/signatureImgSlice";
 
 const defaultWidth = 200;
@@ -15,6 +15,7 @@ function ImageDropzone({ colHeight, colWidth, colId}) {
   const dispatch = useDispatch();
 
   const [selectedImage, setSelectImage] = useState('');
+  const [isError, setIsError] = useState(false);
 
   const onDrop = useCallback((acceptedFiles) => {
       dispatch(createSignature());
@@ -37,6 +38,10 @@ function ImageDropzone({ colHeight, colWidth, colId}) {
             id: colId,
           };
           dispatch(updateColumn(data));
+        })
+        .catch(err => {
+          console.log('err:', err);
+          alert("上傳照片發生錯誤，請稍後再試！")
         });
         dispatch(completeUploadSignatureImage());
     },
@@ -50,26 +55,26 @@ function ImageDropzone({ colHeight, colWidth, colId}) {
 
   return (
     <>
-        <Flex
-          {...getRootProps({ className: 'dropzone' })}
-          w={selectedImage ? colWidth : defaultWidth}
-          h={colHeight}
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Input {...getInputProps()} />
-          <Flex w="100%" justifyContent="center">
-            {selectedImage ? (
-              <Image
-                src={selectedImage}
-                alt="image"
-                referrerPolicy="no-referrer"
-              />
-            ) : (
-              <Text fontSize="sm">Upload or Drag here</Text>
-            )}
-          </Flex>
+      <Flex
+        {...getRootProps({ className: 'dropzone' })}
+        w={selectedImage ? colWidth : defaultWidth}
+        h={colHeight}
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Input {...getInputProps()} />
+        <Flex w="100%" justifyContent="center">
+          {selectedImage ? (
+            <Image
+              src={selectedImage}
+              alt="image"
+              referrerPolicy="no-referrer"
+            />
+          ) : (
+            <Text fontSize="sm">Upload or Drag here</Text>
+          )}
         </Flex>
+      </Flex>
     </>
   );
 }

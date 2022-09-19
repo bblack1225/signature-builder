@@ -46,7 +46,7 @@ export default function OutputBox(){
       const timer = setTimeout(() => {
           dispatch(completeSignature());
           setIsComplete(true)
-        }, 1000)
+        }, 1500)
 
       return () => clearTimeout(timer);
     },[isCreate]);

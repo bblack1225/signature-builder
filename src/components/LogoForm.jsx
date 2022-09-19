@@ -1,5 +1,5 @@
 import { ViewIcon } from "@chakra-ui/icons";
-import { Box, Center, Flex, Image, Input, Stack, Text } from "@chakra-ui/react";
+import { Box, Center, Flex, Image, Input } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 
 const LogoForm = () => {

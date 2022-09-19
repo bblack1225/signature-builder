@@ -7,13 +7,11 @@ import ImageDropzone from './ImageDropzone';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteColumn, insertColumn, updateColumn } from '../redux/signatureImgSlice';
 import { createSignature } from '../redux/createSignatureSlice';
-import { BeatLoader } from 'react-spinners';
 
 export default function InfoForm(){
 
 const { typeBCol, typeCCol } = useSelector((state) => state.signatureImg);
 const { type } = useSelector((state) => state.signatureType);
-const { isUploading, isCreate} = useSelector((state) => state.createSignature);
 const dispatch = useDispatch();
 
 const [infos, setInfos] = useState([]);
@@ -31,7 +29,7 @@ const finalRef = useRef(null);
 useEffect(() => {
   const column = type === 'B' ? typeBCol : typeCCol;
   setInfos(column);
-}, [type, typeBCol, typeCCol]);
+}, [type]);
 
 
 const handleDeleteColumn = (id) => {
@@ -72,14 +70,6 @@ const handleCreateSignature = () => {
 
   return (
     <>
-      {/* {isCreate ? (
-        <>
-          {console.log('@@@@@')}
-          <Flex justifyContent="center" alignItems="center" h="30%" w="100%">
-            <BeatLoader color="#1B4079" />
-          </Flex>
-        </>
-      ) : ( */}
         <Flex flexDir="column">
           {infos.map((info) => (
             <Box key={info.id}>
@@ -91,7 +81,6 @@ const handleCreateSignature = () => {
               >
                 <Box w="5%">{info.icon}</Box>
                 <Box w="40%" textAlign="center">
-                  {/* {info.columnName} */}
                   <Input
                     bg="white"
                     borderRadius={20}
