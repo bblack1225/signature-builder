@@ -95,10 +95,9 @@ const handleCreateSignature = () => {
                   border="1px"
                   borderColor="gray.200"
                   borderRadius={20}
-                  bg={info.type === InfoType.WEBSITE ? 'gray.300' : 'white'}
+                  bg={info.type === InfoType.WEBSITE ? 'gray300' : 'white'}
                   h="50px"
                   textAlign="center"
-
                   _hover={info.type === InfoType.WEBSITE ? { cursor: 'not-allowed' } : {cursor: 'pointer'}}
                 >
                   {info.type === InfoType.WEBSITE ? (
