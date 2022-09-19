@@ -51,7 +51,7 @@ const initialState = {
     {
       id: 6,
       type: InfoType.WEBSITE,
-      columnName: '公司官網',
+      columnName: '官網連結',
       img: 'https://i.imgur.com/sEi6t0z.png',
       icon: InfoType.WEBSITE.icon,
       value: 'https://www.infolink-group.com',

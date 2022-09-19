@@ -70,80 +70,83 @@ const handleCreateSignature = () => {
 
   return (
     <>
-        <Flex flexDir="column">
-          {infos.map((info) => (
-            <Box key={info.id}>
-              <Flex
-                w="100%"
-                p={2}
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Box w="5%">{info.icon}</Box>
-                <Box w="40%" textAlign="center">
-                  <Input
-                    bg="white"
-                    borderRadius={20}
-                    placeholder={info.columnName}
-                    type={info.type === InfoType.PHONE ? 'tel' : 'text'}
-                    disabled={info.isDisabled}
-                    onChange={(e) => handleColValueChange(e, info.id)}
-                  />
-                </Box>
-                <Box w="40%">
-                  <Center
-                    border="1px"
-                    borderColor="gray.200"
-                    borderRadius={20}
-                    bg="white"
-                    h="50px"
-                    textAlign="center"
-                  >
-                    {info.type === InfoType.WEBSITE ? (
-                      <Image src={info.img}  />
-                    ) :
+      <Flex flexDir="column">
+        {infos.map((info) => (
+          <Box key={info.id}>
+            <Flex
+              w="100%"
+              p={2}
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Box w="5%">{info.icon}</Box>
+              <Box w="40%" textAlign="center">
+                <Input
+                  bg="white"
+                  borderRadius={20}
+                  placeholder={info.columnName}
+                  type={info.type === InfoType.PHONE ? 'tel' : 'text'}
+                  disabled={info.isDisabled}
+                  onChange={(e) => handleColValueChange(e, info.id)}
+                />
+              </Box>
+              <Box w="40%">
+                <Center
+                  border="1px"
+                  borderColor="gray.200"
+                  borderRadius={20}
+                  bg={info.type === InfoType.WEBSITE ? 'gray.300' : 'white'}
+                  h="50px"
+                  textAlign="center"
+
+                  _hover={info.type === InfoType.WEBSITE ? { cursor: 'not-allowed' } : {cursor: 'pointer'}}
+                >
+                  {info.type === InfoType.WEBSITE ? (
+                    <Image src={info.img} />
+                  ) : (
                     <ImageDropzone
                       colWidth={200}
                       colHeight={50}
                       colId={info.id}
-                    /> }
-                  </Center>
-                </Box>
-                <Box w="5%">
-                  <IconButton
-                    bg="transparent"
-                    aria-label="Delete button"
-                    icon={<DeleteIcon />}
-                    onClick={(e) => handleDeleteColumn(info.id)}
-                  />
-                </Box>
-              </Flex>
-              <Divider />
-            </Box>
-          ))}
-          <Flex justifyContent="space-between" mt="30px" alignItems="center">
-            <Box>
-              <Button
-                rightIcon={<AddIcon />}
-                colorScheme="blue"
-                variant="ghost"
-                onClick={onOpen}
-              >
-                新增欄位
-              </Button>
-            </Box>
-            <Box>
-              <Button
-                rightIcon={<CheckIcon />}
-                colorScheme="blue"
-                variant="ghost"
-                onClick={handleCreateSignature}
-              >
-                製作簽名檔
-              </Button>
-            </Box>
-          </Flex>
+                    />
+                  )}
+                </Center>
+              </Box>
+              <Box w="5%">
+                <IconButton
+                  bg="transparent"
+                  aria-label="Delete button"
+                  icon={<DeleteIcon />}
+                  onClick={(e) => handleDeleteColumn(info.id)}
+                />
+              </Box>
+            </Flex>
+            <Divider />
+          </Box>
+        ))}
+        <Flex justifyContent="space-between" mt="30px" alignItems="center">
+          <Box>
+            <Button
+              rightIcon={<AddIcon />}
+              colorScheme="blue"
+              variant="ghost"
+              onClick={onOpen}
+            >
+              新增欄位
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              rightIcon={<CheckIcon />}
+              colorScheme="blue"
+              variant="ghost"
+              onClick={handleCreateSignature}
+            >
+              製作簽名檔
+            </Button>
+          </Box>
         </Flex>
+      </Flex>
       {/* )} */}
       <Modal
         initialFocusRef={initialRef}
