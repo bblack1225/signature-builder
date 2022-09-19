@@ -15,7 +15,7 @@ const LogoForm = () => {
           <ViewIcon />
         </Box>
         <Box w="40%" textAlign="center">
-          <Input borderRadius="20px" placeholder="官網連結" />
+          <Input borderRadius="20px" placeholder="官網連結" disabled />
         </Box>
         <Box w="40%">
           <Center

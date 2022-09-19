@@ -1,4 +1,4 @@
-import { Box, Button, Center, Divider, Flex, FormControl, IconButton, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, useDisclosure } from '@chakra-ui/react';
+import { Box, Button, Center, Divider, Flex, FormControl, IconButton, Image, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, useDisclosure } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
 import { InfoType } from '../constants/InfoType';
 import { DeleteIcon, AddIcon, CheckIcon } from '@chakra-ui/icons';
@@ -29,7 +29,7 @@ const finalRef = useRef(null);
 useEffect(() => {
   const column = type === 'B' ? typeBCol : typeCCol;
   setInfos(column);
-}, [type]);
+}, [type, typeBCol, typeCCol]);
 
 
 const handleDeleteColumn = (id) => {
@@ -86,7 +86,7 @@ const handleCreateSignature = () => {
                     borderRadius={20}
                     placeholder={info.columnName}
                     type={info.type === InfoType.PHONE ? 'tel' : 'text'}
-                    disabled={info.icon === InfoType.NORMAL.icon}
+                    disabled={info.isDisabled}
                     onChange={(e) => handleColValueChange(e, info.id)}
                   />
                 </Box>
@@ -99,11 +99,14 @@ const handleCreateSignature = () => {
                     h="50px"
                     textAlign="center"
                   >
+                    {info.type === InfoType.WEBSITE ? (
+                      <Image src={info.img}  />
+                    ) :
                     <ImageDropzone
                       colWidth={200}
                       colHeight={50}
                       colId={info.id}
-                    />
+                    /> }
                   </Center>
                 </Box>
                 <Box w="5%">

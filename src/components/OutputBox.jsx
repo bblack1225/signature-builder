@@ -79,6 +79,7 @@ export default function OutputBox(){
                 </Td>
                 <Td borderLeft="1px solid #ccc" p="0" borderBottom="none">
                   {copyValue.map((info, index) =>
+                    info.img && (
                     info.type === InfoType.NORMAL ? (
                       <Image
                         w="250px"
@@ -95,7 +96,7 @@ export default function OutputBox(){
                         <Image w="250px" src={info.img} my={myBVal} ml="7px" />
                       </Link>
                     )
-                  )}
+                  ))}
                 </Td>
               </Tr>
             </Tbody>
@@ -111,7 +112,7 @@ export default function OutputBox(){
             <Tbody>
               <Tr>
                 <Td borderBottom="none" p="0" valign="top" bg="#fff">
-                  <Link href="https://www.infolink-group.com/">
+                  <Link href="https://www.reccessary.com/en">
                     <Image src={imageCURL} w="300px" ml="0px" />
                   </Link>
                   <Flex>

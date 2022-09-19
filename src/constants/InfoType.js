@@ -7,9 +7,15 @@ export const InfoType = {
     icon: <ViewIcon />,
     linkVal:null
   },
-  PHONE: {
+  MOBILE_PHONE: {
+    value: 'mobilePhone',
+    label: '手機電話',
+    icon: <PhoneIcon />,
+    linkVal: 'tel:',
+  },
+  TELEPHONE: {
     value: 'phone',
-    label: '電話',
+    label: '市話',
     icon: <PhoneIcon />,
     linkVal: 'tel:',
   },

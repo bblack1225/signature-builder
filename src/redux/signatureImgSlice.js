@@ -10,6 +10,7 @@ const initialState = {
       img: '',
       icon: InfoType.NORMAL.icon,
       value: null,
+      isDisabled: true,
     },
     {
       id: 2,
@@ -18,22 +19,25 @@ const initialState = {
       img: '',
       icon: InfoType.NORMAL.icon,
       value: null,
+      isDisabled: true,
     },
     {
       id: 3,
       type: InfoType.PHONE,
       columnName: '手機',
       img: '',
-      icon: InfoType.PHONE.icon,
+      icon: InfoType.MOBILE_PHONE.icon,
       value: '0929023456',
+      isDisabled: false,
     },
     {
       id: 4,
       type: InfoType.PHONE,
       columnName: '公司電話',
       img: '',
-      icon: InfoType.PHONE.icon,
+      icon: InfoType.TELEPHONE.icon,
       value: '886-2-27163123',
+      isDisabled: false,
     },
     {
       id: 5,
@@ -42,14 +46,16 @@ const initialState = {
       img: '',
       icon: InfoType.EMAIL.icon,
       value: 'serena.chooi@infolink-group.com',
+      isDisabled: false,
     },
     {
       id: 6,
       type: InfoType.WEBSITE,
       columnName: '公司官網',
-      img: '',
+      img: 'https://i.imgur.com/sEi6t0z.png',
       icon: InfoType.WEBSITE.icon,
       value: 'https://www.infolink-group.com',
+      isDisabled: true,
     },
   ],
   typeCCol: [
@@ -60,6 +66,7 @@ const initialState = {
       img: '',
       icon: InfoType.NORMAL.icon,
       value: null,
+      isDisabled: true,
     },
     {
       id: 2,
@@ -68,22 +75,25 @@ const initialState = {
       img: '',
       icon: InfoType.NORMAL.icon,
       value: null,
+      isDisabled: true,
     },
     {
       id: 3,
       type: InfoType.PHONE,
       columnName: '手機',
       img: '',
-      icon: InfoType.PHONE.icon,
+      icon: InfoType.MOBILE_PHONE.icon,
       value: null,
+      isDisabled: false,
     },
     {
       id: 4,
       type: InfoType.PHONE,
       columnName: '公司電話',
       img: '',
-      icon: InfoType.PHONE.icon,
+      icon: InfoType.TELEPHONE.icon,
       value: null,
+      isDisabled: false,
     },
     {
       id: 5,
@@ -92,6 +102,7 @@ const initialState = {
       img: '',
       icon: InfoType.EMAIL.icon,
       value: null,
+      isDisabled: false,
     },
   ],
   logoForm: {
@@ -121,7 +132,6 @@ export const signatureImgSlice = createSlice({
       }
     },
     updateColumn: (state, action) => {
-      console.log('action',action)
       const { id, type, form } = action.payload;
       if (type === 'B') {
         const index = state.typeBCol.findIndex((col) => col.id === id);
