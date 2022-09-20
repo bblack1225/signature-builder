@@ -101,7 +101,7 @@ const handleCreateSignature = () => {
                   _hover={info.type === InfoType.WEBSITE ? { cursor: 'not-allowed' } : {cursor: 'pointer'}}
                 >
                   {info.type === InfoType.WEBSITE ? (
-                    <Image src={info.img} />
+                    <Image src={info.img} alt='img' />
                   ) : (
                     <ImageDropzone
                       colWidth={200}

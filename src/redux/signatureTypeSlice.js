@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-    type: 'B'
+    type: 'B',
 }
 
 export const signatureTypeSlice = createSlice({
@@ -10,7 +10,7 @@ export const signatureTypeSlice = createSlice({
     reducers: {
         setSignatureType: (state, action) => {
             state.type = action.payload;
-        }
+        },
     }
 })
 

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BeatLoader } from "react-spinners";
 import { InfoType } from "../constants/InfoType";
-import { completeSignature } from "../redux/createSignatureSlice";
+import { completeSignature, resetState } from "../redux/createSignatureSlice";
 
 export default function OutputBox(){
     const myBVal = '8px';
@@ -14,12 +14,12 @@ export default function OutputBox(){
     const imageBURL = 'https://i.imgur.com/Yk2soxS.png';
     const imageCURL = 'https://i.imgur.com/U531d5c.png';
     const { typeBCol, typeCCol } = useSelector((state) => state.signatureImg);
-    const { isCreate } = useSelector((state) => state.createSignature);
+    const { isCreate, isDone } = useSelector((state) => state.createSignature);
     const { type } = useSelector((state) => state.signatureType);
     const dispatch = useDispatch();
 
     const [copyValue, setCopyValue] = useState(type === 'B' ? typeBCol : typeCCol);
-    const [isComplete, setIsComplete] = useState(false);
+    const [isComplete, setIsComplete] = useState(true);
     const contentRef = useRef(null);
 
     const handleCopy = () => {
@@ -43,18 +43,27 @@ export default function OutputBox(){
     }
 
     useEffect(() => {
-      const timer = setTimeout(() => {
-          dispatch(completeSignature());
-          setIsComplete(true)
-        }, 1500)
-
-      return () => clearTimeout(timer);
+      if(isCreate){
+        setIsComplete(false);
+      }
     },[isCreate]);
 
     useEffect(() => {
+      if(isDone){
+        setIsComplete(true);
+        dispatch(resetState());
+      }
+    },[isDone])
+
+    useEffect(() => {
+      console.log('in change type useEffect');
       const column = type === 'B' ? typeBCol : typeCCol;
       setCopyValue(column);
     }, [type, typeBCol, typeCCol]);
+
+    useEffect(() => {
+
+    })
 
     const getLinkValue= (type, value) => {
       if(type === InfoType.PHONE){
@@ -158,19 +167,14 @@ export default function OutputBox(){
         mt={{ md: '50px', sm: '50px' }}
         border="1px solid #ccc"
       >
-        {isCreate ? (
-          <Flex justifyContent="center" alignItems="center" h="30%">
-            <BeatLoader color="#1B4079" />
-          </Flex>
-        ) : isComplete ? (
-          <>
-            <Table cellPadding="0" ref={contentRef}>
+        {isComplete ? (
+         <>
+            <Table cellPadding="0" ref={contentRef} minH='200px'>
               <Tbody direction="row" height="150px" p="10px">
                 <Tr>{type === 'B' ? typeBOutput() : typeCOutput()}</Tr>
               </Tbody>
             </Table>
             <Box textAlign="right" mr="20px">
-              {/* <Tooltip hasArrow bg="gray.200" label={text}> */}
               <IconButton
                 colorScheme="facebook"
                 variant="outline"
@@ -178,12 +182,10 @@ export default function OutputBox(){
                 icon={<CopyIcon />}
                 onClick={handleCopy}
               />
-              {/* </Tooltip> */}
             </Box>
           </>
-        ) : (
-          // <Text>Not Upload</Text>
-          <Flex justifyContent="center" alignItems="center" h="30%">
+        ) :  (
+           <Flex justifyContent="center" alignItems="center" h="30%">
             <BeatLoader color="#1B4079" />
           </Flex>
         )}

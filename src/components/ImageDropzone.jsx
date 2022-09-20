@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useDispatch, useSelector } from "react-redux";
-import { completeUploadSignatureImage, createSignature } from "../redux/createSignatureSlice";
+import { completeSignature, completeUploadSignatureImage, createSignature } from "../redux/createSignatureSlice";
 import { updateColumn } from "../redux/signatureImgSlice";
 
 const defaultWidth = 200;
@@ -38,15 +38,19 @@ function ImageDropzone({ colHeight, colWidth, colId}) {
             id: colId,
           };
           dispatch(updateColumn(data));
+          dispatch(completeUploadSignatureImage());
         })
         .catch(err => {
           console.log('err:', err);
           alert("上傳照片發生錯誤，請稍後再試！")
         });
-        dispatch(completeUploadSignatureImage());
     },
     [type]
   );
+
+  const triggerComplete = () => {
+    dispatch(createSignature(false))
+  }
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
