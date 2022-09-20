@@ -9,7 +9,7 @@ export const InfoType = {
   },
   MOBILE_PHONE: {
     value: 'mobilePhone',
-    label: '手機電話',
+    label: '手機',
     icon: <PhoneIcon />,
     linkVal: 'tel:',
   },

@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import ImageDropzone from './ImageDropzone';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteColumn, insertColumn, updateColumn } from '../redux/signatureImgSlice';
-import { createSignature } from '../redux/createSignatureSlice';
+import { completeSignature, createSignature } from '../redux/createSignatureSlice';
 
 export default function InfoForm(){
 
@@ -64,9 +64,12 @@ const handleColValueChange = (e, id) => {
   dispatch(updateColumn(data));
 };
 
-const handleCreateSignature = () => {
-  dispatch(createSignature())
-}
+// const handleCreateSignature = () => {
+//   dispatch(createSignature())
+//   setTimeout(() => {
+//     dispatch(completeUploadSignatureImage());
+//   },500)
+// }
 
   return (
     <>
@@ -134,7 +137,7 @@ const handleCreateSignature = () => {
               新增欄位
             </Button>
           </Box>
-          <Box>
+          {/* <Box>
             <Button
               rightIcon={<CheckIcon />}
               colorScheme="blue"
@@ -143,7 +146,7 @@ const handleCreateSignature = () => {
             >
               製作簽名檔
             </Button>
-          </Box>
+          </Box> */}
         </Flex>
       </Flex>
       {/* )} */}

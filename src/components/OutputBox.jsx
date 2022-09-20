@@ -61,10 +61,6 @@ export default function OutputBox(){
       setCopyValue(column);
     }, [type, typeBCol, typeCCol]);
 
-    useEffect(() => {
-
-    })
-
     const getLinkValue= (type, value) => {
       if(type === InfoType.PHONE){
         return `tel:${value}`

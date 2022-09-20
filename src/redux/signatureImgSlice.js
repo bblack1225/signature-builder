@@ -27,16 +27,16 @@ const initialState = {
       columnName: '手機',
       img: '',
       icon: InfoType.MOBILE_PHONE.icon,
-      value: '0929023456',
+      value: null,
       isDisabled: false,
     },
     {
       id: 4,
       type: InfoType.PHONE,
-      columnName: '公司電話',
+      columnName: '市話',
       img: '',
       icon: InfoType.TELEPHONE.icon,
-      value: '886-2-27163123',
+      value: null,
       isDisabled: false,
     },
     {
@@ -45,7 +45,7 @@ const initialState = {
       columnName: 'Email',
       img: '',
       icon: InfoType.EMAIL.icon,
-      value: 'serena.chooi@infolink-group.com',
+      value: null,
       isDisabled: false,
     },
     {
@@ -89,7 +89,7 @@ const initialState = {
     {
       id: 4,
       type: InfoType.PHONE,
-      columnName: '公司電話',
+      columnName: '市話',
       img: '',
       icon: InfoType.TELEPHONE.icon,
       value: null,
