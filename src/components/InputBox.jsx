@@ -29,14 +29,14 @@ const InputBox = () => {
               _selected={{ color: 'white', bg: 'blue.700' }}
               borderRadius="10px"
             >
-              Type B
+              InfoLink
             </Tab>
             <Tab
               w="50%"
               _selected={{ color: 'white', bg: 'blue.700' }}
               borderRadius="10px"
             >
-              Type C
+              RECC
             </Tab>
           </TabList>
           <TabPanels>
