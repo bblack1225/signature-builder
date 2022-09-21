@@ -4,15 +4,14 @@ import React, { useRef } from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BeatLoader } from "react-spinners";
+import { IMAGE_B_URL, IMAGE_C_URL } from '../constants/imageUrl';
 import { InfoType } from "../constants/InfoType";
-import { completeSignature, resetState } from "../redux/createSignatureSlice";
+import { resetState } from "../redux/createSignatureSlice";
 
 export default function OutputBox(){
     const myBVal = '8px';
     const myCVal = '6px';
 
-    const imageBURL = 'https://i.imgur.com/Yk2soxS.png';
-    const imageCURL = 'https://i.imgur.com/U531d5c.png';
     const { typeBCol, typeCCol } = useSelector((state) => state.signatureImg);
     const { isCreate, isDone } = useSelector((state) => state.createSignature);
     const { type } = useSelector((state) => state.signatureType);
@@ -39,7 +38,7 @@ export default function OutputBox(){
         document.execCommand('copy');
 
       }
-      sel.removeAllRanges();
+      // sel.removeAllRanges();
     }
 
     useEffect(() => {
@@ -56,7 +55,6 @@ export default function OutputBox(){
     },[isDone])
 
     useEffect(() => {
-      console.log('in change type useEffect');
       const column = type === 'B' ? typeBCol : typeCCol;
       setCopyValue(column);
     }, [type, typeBCol, typeCCol]);
@@ -79,29 +77,35 @@ export default function OutputBox(){
               <Tr>
                 <Td borderBottom="none" p="0" valign="top" bg="#fff">
                   <Link href="https://www.infolink-group.com/">
-                    <Image boxSize="90px" src={imageBURL} mr="5px" />
+                    <Image boxSize="90px" src={IMAGE_B_URL} mr="5px" />
                   </Link>
                 </Td>
                 <Td borderLeft="1px solid #ccc" p="0" borderBottom="none">
-                  {copyValue.map((info, index) =>
-                    info.img && (
-                    info.type === InfoType.NORMAL ? (
-                      <Image
-                        w="250px"
-                        src={info.img}
-                        key={index}
-                        my={myBVal}
-                        ml="10px"
-                      />
-                    ) : (
-                      <Link
-                        href={getLinkValue(info.type, info.value)}
-                        key={index}
-                      >
-                        <Image w="250px" src={info.img} my={myBVal} ml="7px" />
-                      </Link>
-                    )
-                  ))}
+                  {copyValue.map(
+                    (info, index) =>
+                      info.img &&
+                      (info.type === InfoType.NORMAL ? (
+                        <Image
+                          w="250px"
+                          src={info.img}
+                          key={index}
+                          my={myBVal}
+                          ml="10px"
+                        />
+                      ) : (
+                        <Link
+                          href={getLinkValue(info.type, info.value)}
+                          key={index}
+                        >
+                          <Image
+                            w="250px"
+                            src={info.img}
+                            my={myBVal}
+                            ml="7px"
+                          />
+                        </Link>
+                      ))
+                  )}
                 </Td>
               </Tr>
             </Tbody>
@@ -118,7 +122,7 @@ export default function OutputBox(){
               <Tr>
                 <Td borderBottom="none" p="0" valign="top" bg="#fff">
                   <Link href="https://www.reccessary.com/en">
-                    <Image src={imageCURL} w="300px" ml="0px" />
+                    <Image src={IMAGE_C_URL} w="300px" ml="0px" />
                   </Link>
                   <Flex>
                     <Box w="18px">

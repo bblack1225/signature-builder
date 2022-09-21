@@ -1,12 +1,11 @@
 import { Box, Button, Center, Divider, Flex, FormControl, IconButton, Image, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, useDisclosure } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
 import { InfoType } from '../constants/InfoType';
-import { DeleteIcon, AddIcon, CheckIcon } from '@chakra-ui/icons';
+import { DeleteIcon, AddIcon } from '@chakra-ui/icons';
 import { useEffect } from 'react';
 import ImageDropzone from './ImageDropzone';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteColumn, insertColumn, updateColumn } from '../redux/signatureImgSlice';
-import { completeSignature, createSignature } from '../redux/createSignatureSlice';
 
 export default function InfoForm(){
 

@@ -1,9 +1,9 @@
-import { Alert, Box, Flex, Image, Input, Text } from "@chakra-ui/react";
+import { Flex, Image, Input, Text } from "@chakra-ui/react";
 import { useCallback } from "react";
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useDispatch, useSelector } from "react-redux";
-import { completeSignature, completeUploadSignatureImage, createSignature } from "../redux/createSignatureSlice";
+import { completeUploadSignatureImage, createSignature } from "../redux/createSignatureSlice";
 import { updateColumn } from "../redux/signatureImgSlice";
 
 const defaultWidth = 200;

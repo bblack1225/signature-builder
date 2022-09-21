@@ -1,13 +1,10 @@
 import { ViewIcon } from "@chakra-ui/icons";
 import { Box, Center, Flex, Image, Input } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
-
+import { IMAGE_B_URL, IMAGE_C_URL } from '../constants/imageUrl';
 const LogoForm = () => {
 
   const { type } = useSelector((state) => state.signatureType);
-
-    const imageBURL = 'https://i.imgur.com/Yk2soxS.png';
-    const imageCURL = 'https://i.imgur.com/U531d5c.png';
 
     return (
       <Flex w="100%" p={2} justifyContent="space-between" alignItems="center">
@@ -26,7 +23,10 @@ const LogoForm = () => {
             h="50px"
             textAlign="center"
           >
-            <Image src={type === 'B' ? imageBURL : imageCURL} boxSize={type === 'B' && 50} />
+            <Image
+              src={type === 'B' ? IMAGE_B_URL : IMAGE_C_URL}
+              boxSize={type === 'B' && 50}
+            />
           </Center>
         </Box>
         <Box w="5%" />

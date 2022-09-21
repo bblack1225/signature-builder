@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { setSignatureType } from "../redux/signatureTypeSlice";
 import InfoForm from "./InfoForm";
 import LogoForm from "./LogoForm";
-import OutputBox from "./OutputBox";
 
 const InputBox = () => {
 
