@@ -80,7 +80,7 @@ export default function OutputBox(){
           >
             <Tbody>
               <Tr>
-                <Td border="none" p="0" valign="top" bg="#fff" display="block">
+                <Td border="none" p="0" valign="top" display="block" mr='10px'>
                   <Link href="https://www.infolink-group.com/" border='none'>
                     <Image
                       boxSize="90px"
@@ -90,7 +90,7 @@ export default function OutputBox(){
                     />
                   </Link>
                 </Td>
-                <Td border="none" borderLeft="1px solid #ccc" p="0">
+                <Td border="none" borderLeft="1px solid #ccc" p="0" >
                   {copyValue.map(
                     (info, index) =>
                       info.img &&
