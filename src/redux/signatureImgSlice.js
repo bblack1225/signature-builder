@@ -49,6 +49,8 @@ const initialState = {
       isDisabled: false,
     },
     {
+      //big size: https://i.imgur.com/sEi6t0z.png
+      //small size: https://i.imgur.com/hJqk4is.png
       id: 6,
       type: InfoType.WEBSITE,
       columnName: '官網連結',

@@ -23,6 +23,7 @@ export default function OutputBox(){
 
     const handleCopy = () => {
       const signatureTable = contentRef.current;
+      console.log('signatureTable', signatureTable);
       let range, sel
       if(document.createRange && window.getSelection) {
         range = document.createRange();
@@ -38,7 +39,7 @@ export default function OutputBox(){
         document.execCommand('copy');
 
       }
-      // sel.removeAllRanges();
+      sel.removeAllRanges();
     }
 
     useEffect(() => {
@@ -71,16 +72,25 @@ export default function OutputBox(){
 
     const typeBOutput = () => {
       return (
-        <Td borderBottom="none">
-          <Table cellPadding="0">
+        <Td border="none">
+          <Table
+            cellPadding="0"
+            style={{ borderCollapse: 'collapse' }}
+            border="0"
+          >
             <Tbody>
               <Tr>
-                <Td borderBottom="none" p="0" valign="top" bg="#fff">
-                  <Link href="https://www.infolink-group.com/">
-                    <Image boxSize="90px" src={IMAGE_B_URL} mr="5px" />
+                <Td border="none" p="0" valign="top" bg="#fff" display="block">
+                  <Link href="https://www.infolink-group.com/" border='none'>
+                    <Image
+                      boxSize="90px"
+                      src={IMAGE_B_URL}
+                      mr="5px"
+                      display="block"
+                    />
                   </Link>
                 </Td>
-                <Td borderLeft="1px solid #ccc" p="0" borderBottom="none">
+                <Td border="none" borderLeft="1px solid #ccc" p="0">
                   {copyValue.map(
                     (info, index) =>
                       info.img &&
@@ -96,6 +106,7 @@ export default function OutputBox(){
                         <Link
                           href={getLinkValue(info.type, info.value)}
                           key={index}
+                          border='none'
                         >
                           <Image
                             w="250px"
@@ -117,12 +128,12 @@ export default function OutputBox(){
     const typeCOutput = () => {
       return (
         <Td borderBottom="none">
-          <Table cellPadding="0">
+          <Table cellPadding="0" >
             <Tbody>
               <Tr>
                 <Td borderBottom="none" p="0" valign="top" bg="#fff">
                   <Link href="https://www.reccessary.com/en">
-                    <Image src={IMAGE_C_URL} w="300px" ml="0px" />
+                    <Image src={IMAGE_C_URL} w="300px" ml="0px" display='block' />
                   </Link>
                   <Flex>
                     <Box w="18px">
@@ -169,7 +180,7 @@ export default function OutputBox(){
       >
         {isComplete ? (
          <>
-            <Table cellPadding="0" ref={contentRef} minH='200px'>
+            <Table cellPadding="0" ref={contentRef} minH='200px' style={{'borderCollapse':"collapse"}} border='0' cellSpacing='0'>
               <Tbody direction="row" height="150px" p="10px">
                 <Tr>{type === 'B' ? typeBOutput() : typeCOutput()}</Tr>
               </Tbody>
