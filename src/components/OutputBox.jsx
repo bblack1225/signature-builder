@@ -80,10 +80,17 @@ export default function OutputBox(){
           >
             <Tbody>
               <Tr>
-                <Td border="none" p="0" valign="top" display="block" mr='10px'>
-                  <Link href="https://www.infolink-group.com/" border='none'>
+                <Td
+                  border="none"
+                  p="0"
+                  valign="top"
+                  display="block"
+                  mr="10px"
+                  w="90px"
+                >
+                  <Link href="https://www.infolink-group.com/" border="none">
                     <Image
-                      boxSize="90px"
+                      htmlWidth="90"
                       src={IMAGE_B_URL}
                       mr="5px"
                       display="block"
@@ -96,7 +103,8 @@ export default function OutputBox(){
                       info.img &&
                       (info.type === InfoType.NORMAL ? (
                         <Image
-                          w="250px"
+                          htmlWidth="250"
+                          htmlHeight="20"
                           src={info.img}
                           key={index}
                           my={myBVal}
@@ -106,10 +114,12 @@ export default function OutputBox(){
                         <Link
                           href={getLinkValue(info.type, info.value)}
                           key={index}
-                          border='none'
+                          border="none"
+                          display='block'
                         >
                           <Image
-                            w="250px"
+                            htmlWidth="250"
+                            htmlHeight="20"
                             src={info.img}
                             my={myBVal}
                             ml="7px"
