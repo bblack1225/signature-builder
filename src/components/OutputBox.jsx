@@ -23,7 +23,6 @@ export default function OutputBox(){
 
     const handleCopy = () => {
       const signatureTable = contentRef.current;
-      console.log('signatureTable', signatureTable);
       let range, sel
       if(document.createRange && window.getSelection) {
         range = document.createRange();
@@ -79,56 +78,82 @@ export default function OutputBox(){
             border="0"
           >
             <Tbody>
-              <Tr>
-                <Td
-                  border="none"
-                  p="0"
-                  valign="top"
-                  display="block"
-                  mr="10px"
-                  w="90px"
+              <tr>
+                <td
+                  style={{
+                    margin: 0,
+                    padding: 0,
+                    border: 'none',
+                    paddingLeft: 7,
+                    verticalAlign: 'top',
+                    display: 'block',
+                    width: 90,
+                  }}
                 >
                   <Link href="https://www.infolink-group.com/" border="none">
-                    <Image
-                      htmlWidth="90"
-                      src={IMAGE_B_URL}
-                      mr="5px"
-                      display="block"
-                    />
+                    <Image htmlWidth="80" src={IMAGE_B_URL} display="block" />
                   </Link>
-                </Td>
-                <Td border="none" borderLeft="1px solid #ccc" p="0" >
-                  {copyValue.map(
-                    (info, index) =>
-                      info.img &&
-                      (info.type === InfoType.NORMAL ? (
-                        <Image
-                          htmlWidth="250"
-                          htmlHeight="20"
-                          src={info.img}
-                          key={index}
-                          my={myBVal}
-                          ml="10px"
-                        />
-                      ) : (
-                        <Link
-                          href={getLinkValue(info.type, info.value)}
-                          key={index}
-                          border="none"
-                          display='block'
-                        >
-                          <Image
-                            htmlWidth="250"
-                            htmlHeight="20"
-                            src={info.img}
-                            my={myBVal}
-                            ml="7px"
-                          />
-                        </Link>
-                      ))
-                  )}
-                </Td>
-              </Tr>
+                </td>
+                <td
+                  style={{ margin: 0, padding: 0, border: 'none',borderLeft:"1px solid #ccc" }}
+                >
+                  <Table
+                    cellPadding="0"
+                    style={{ borderCollapse: 'collapse' }}
+                    border="0"
+                  >
+                    {copyValue.map(
+                      (info, index) =>
+                        info.img &&
+                        (info.type === InfoType.NORMAL ? (
+                          <tr>
+                            <td
+                              style={{
+                                margin: 0,
+                                padding: 0,
+                                border: 'none',
+                                paddingLeft: 7,
+                              }}
+                            >
+                              <Image
+                                htmlWidth="300"
+                                htmlHeight="18"
+                                src={info.img}
+                                key={index}
+                                mt={myBVal}
+                              />
+                            </td>
+                          </tr>
+                        ) : (
+                          <tr>
+                            <td
+                              style={{
+                                margin: 0,
+                                padding: 0,
+                                border: 'none',
+                                paddingLeft: 7,
+                              }}
+                            >
+                              <Link
+                                href={getLinkValue(info.type, info.value)}
+                                key={index}
+                                border="none"
+                                display="block"
+                              >
+                                <Image
+                                  htmlWidth="300"
+                                  htmlHeight="18"
+                                  src={info.img}
+                                  mt={myBVal}
+                                />
+                              </Link>
+                            </td>
+                          </tr>
+                        ))
+                    )}
+                  </Table>
+                </td>
+              </tr>
             </Tbody>
           </Table>
         </Td>
