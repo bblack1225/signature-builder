@@ -103,9 +103,7 @@ export default function OutputBox(){
                   <Table
                     cellPadding="0"
                     cellSpacing="0"
-                    role="presentation"
-                    border="0"
-                    style={{ borderCollapse: 'collapse' }}
+                    style={{ borderCollapse: 'collapse',border:'none' }}
                   >
                     <tbody>
                       {copyValue.map(
@@ -123,7 +121,7 @@ export default function OutputBox(){
                                 }}
                               >
                                 <Image
-                                  htmlWidth="300px"
+                                  htmlWidth="300"
                                   htmlHeight={info.columnName === '姓名' ? '21':'18'}
                                   src={info.img}
                                   key={index}
@@ -169,40 +167,125 @@ export default function OutputBox(){
 
     const typeCOutput = () => {
       return (
-        <Td borderBottom="none">
-          <Table cellPadding="0" >
+        <Td style={{ border: 'none' }}>
+          <Table
+            cellPadding="0"
+            style={{ borderCollapse: 'collapse', border: 'none' }}
+            cellSpacing="0"
+          >
             <Tbody>
-              <Tr>
-                <Td borderBottom="none" p="0" valign="top" bg="#fff">
-                  <Link href="https://www.reccessary.com/en">
-                    <Image src={IMAGE_C_URL} w="300px" ml="0px" display='block' />
+              <tr>
+                <td
+                  bg="#fff"
+                  style={{
+                    margin: '0.1px',
+                    padding: 0,
+                    border: 'none',
+                    verticalAlign: 'top',
+                    width: 300,
+                    display: 'block',
+                    borderCollapse: 'collapse',
+                  }}
+                >
+                  <Link
+                    href="https://www.reccessary.com/en"
+                    style={{ border: 'none' }}
+                  >
+                    <Image
+                      src={IMAGE_C_URL}
+                      htmlWidth="300"
+                      htmlHeight="21"
+                      ml="0px"
+                      display="block"
+                    />
                   </Link>
-                  <Flex>
-                    <Box w="18px">
-                      <Image w="20px" src={'https://i.imgur.com/ANllioi.png'} />
-                    </Box>
-                    <Box ml={myCVal}>
-                      {copyValue.map((info, index) =>
-                        info.type === InfoType.NORMAL ? (
+                  <Table>
+                    <tbody>
+                      <tr>
+                        <td
+                          style={{
+                            margin: '0.1px',
+                            padding: '0',
+                            border: 'none',
+                            verticalAlign: 'top',
+                            display: 'block',
+                            width: '90',
+                            borderCollapse: 'collapse',
+                          }}
+                        >
                           <Image
-                            w="250px"
-                            src={info.img}
-                            key={index}
-                            my={myCVal}
+                            htmlWidth="20"
+                            htmlHeight="120"
+                            src={'https://i.imgur.com/ANllioi.png'}
                           />
-                        ) : (
-                          <Link
-                            href={getLinkValue(info.type, info.value)}
-                            key={index}
+                        </td>
+                        <td
+                          style={{
+                            padding: '0px 0px 10px 0px',
+                            margin: '0.1px',
+                            border: 'none',
+                            borderCollapse: 'collapse',
+                          }}
+                        >
+                          <Table
+                            cellPadding="0"
+                            cellSpacing="0"
+                            style={{ borderCollapse: 'collapse' }}
                           >
-                            <Image w="250px" src={info.img} my={myCVal} />
-                          </Link>
-                        )
-                      )}
-                    </Box>
-                  </Flex>
-                </Td>
-              </Tr>
+                            <tbody>
+                              {copyValue.map((info, index) =>
+                                info.type === InfoType.NORMAL ? (
+                                  <tr key={index}>
+                                    <td
+                                      style={{
+                                        margin: '0.1px',
+                                        padding: '0px 0px 3px 5px',
+                                        border: 'none',
+                                        borderCollapse: 'collapse',
+                                        height: '23',
+                                      }}
+                                    >
+                                      <Image
+                                        htmlWidth="250"
+                                        src={info.img}
+                                        key={index}
+                                      />
+                                    </td>
+                                  </tr>
+                                ) : (
+                                  <tr key={index}>
+                                    <td
+                                      style={{
+                                        margin: '0.1px',
+                                        padding: '3px 0px 0px 5px',
+                                        border: 'none',
+                                        borderCollapse: 'collapse',
+                                        height: '23',
+                                      }}
+                                    >
+                                      <Link
+                                        href={getLinkValue(
+                                          info.type,
+                                          info.value
+                                        )}
+                                        key={index}
+                                        border="none"
+                                        display="block"
+                                      >
+                                        <Image htmlWidth="250" src={info.img} />
+                                      </Link>
+                                    </td>
+                                  </tr>
+                                )
+                              )}
+                            </tbody>
+                          </Table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </td>
+              </tr>
             </Tbody>
           </Table>
         </Td>
