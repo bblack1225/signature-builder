@@ -9,7 +9,6 @@ import { InfoType } from "../constants/InfoType";
 import { resetState } from "../redux/createSignatureSlice";
 
 export default function OutputBox(){
-    const myBVal = '8px';
     const myCVal = '6px';
 
     const { typeBCol, typeCCol } = useSelector((state) => state.signatureImg);
@@ -86,7 +85,7 @@ export default function OutputBox(){
                     border: 'none',
                     verticalAlign: 'top',
                     display: 'block',
-                    width: 90,
+                    width: '90',
                     borderCollapse: 'collapse',
                   }}
                 >
@@ -96,7 +95,6 @@ export default function OutputBox(){
                 </td>
                 <td
                   style={{
-                    marginLeft: 0,
                     padding: 0,
                     border: 'none',
                     borderLeft: '1px solid #ccc',
@@ -121,11 +119,11 @@ export default function OutputBox(){
                                   padding: '0px 0px 3px 10px',
                                   border: 'none',
                                   borderCollapse: 'collapse',
-                                  height: '23px',
+                                  height: '23',
                                 }}
                               >
                                 <Image
-                                  htmlWidth="300"
+                                  htmlWidth="300px"
                                   htmlHeight={info.columnName === '姓名' ? '21':'18'}
                                   src={info.img}
                                   key={index}
@@ -140,7 +138,7 @@ export default function OutputBox(){
                                   padding: '3px 0px 0px 7px',
                                   border: 'none',
                                   borderCollapse: 'collapse',
-                                  height: '23px',
+                                  height: '23',
                                 }}
                               >
                                 <Link
