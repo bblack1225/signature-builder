@@ -1,5 +1,5 @@
 import { CopyIcon } from "@chakra-ui/icons";
-import { Box, Flex, IconButton, Image, Link, Table, Tbody, Td, Text, Tr } from "@chakra-ui/react";
+import { Box, Flex, IconButton, Image, Link, Table, Tbody, Td, Tr } from "@chakra-ui/react";
 import React, { useRef } from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -71,90 +71,99 @@ export default function OutputBox(){
 
     const typeBOutput = () => {
       return (
-        <Td border="none">
+        <Td style={{ border: 'none' }}>
           <Table
             cellPadding="0"
-            style={{ borderCollapse: 'collapse' }}
-            border="0"
+            style={{ borderCollapse: 'collapse', border: 0 }}
+            cellSpacing="0"
           >
-            <Tbody>
+            <tbody>
               <tr>
                 <td
                   style={{
-                    margin: 0,
-                    padding: 0,
+                    margin: '0.1px',
+                    padding: '0px 5px 0px 0px',
                     border: 'none',
-                    paddingLeft: 7,
                     verticalAlign: 'top',
                     display: 'block',
                     width: 90,
+                    borderCollapse: 'collapse',
                   }}
                 >
                   <Link href="https://www.infolink-group.com/" border="none">
-                    <Image htmlWidth="80" src={IMAGE_B_URL} display="block" />
+                    <Image htmlWidth="90" src={IMAGE_B_URL} display="block" />
                   </Link>
                 </td>
                 <td
-                  style={{ margin: 0, padding: 0, border: 'none',borderLeft:"1px solid #ccc" }}
+                  style={{
+                    marginLeft: 0,
+                    padding: 0,
+                    border: 'none',
+                    borderLeft: '1px solid #ccc',
+                  }}
                 >
                   <Table
                     cellPadding="0"
-                    style={{ borderCollapse: 'collapse' }}
+                    cellSpacing="0"
+                    role="presentation"
                     border="0"
+                    style={{ borderCollapse: 'collapse' }}
                   >
-                    {copyValue.map(
-                      (info, index) =>
-                        info.img &&
-                        (info.type === InfoType.NORMAL ? (
-                          <tr>
-                            <td
-                              style={{
-                                margin: 0,
-                                padding: 0,
-                                border: 'none',
-                                paddingLeft: 7,
-                              }}
-                            >
-                              <Image
-                                htmlWidth="300"
-                                htmlHeight="18"
-                                src={info.img}
-                                key={index}
-                                mt={myBVal}
-                              />
-                            </td>
-                          </tr>
-                        ) : (
-                          <tr>
-                            <td
-                              style={{
-                                margin: 0,
-                                padding: 0,
-                                border: 'none',
-                                paddingLeft: 7,
-                              }}
-                            >
-                              <Link
-                                href={getLinkValue(info.type, info.value)}
-                                key={index}
-                                border="none"
-                                display="block"
+                    <tbody>
+                      {copyValue.map(
+                        (info, index) =>
+                          info.img &&
+                          (info.type === InfoType.NORMAL ? (
+                            <tr key={index}>
+                              <td
+                                style={{
+                                  margin: '0.1px',
+                                  padding: '0px 0px 3px 10px',
+                                  border: 'none',
+                                  borderCollapse: 'collapse',
+                                  height: '23px',
+                                }}
                               >
                                 <Image
                                   htmlWidth="300"
-                                  htmlHeight="18"
+                                  htmlHeight={info.columnName === '姓名' ? '21':'18'}
                                   src={info.img}
-                                  mt={myBVal}
+                                  key={index}
                                 />
-                              </Link>
-                            </td>
-                          </tr>
-                        ))
-                    )}
+                              </td>
+                            </tr>
+                          ) : (
+                            <tr key={index}>
+                              <td
+                                style={{
+                                  margin: '0.1px',
+                                  padding: '3px 0px 0px 7px',
+                                  border: 'none',
+                                  borderCollapse: 'collapse',
+                                  height: '23px',
+                                }}
+                              >
+                                <Link
+                                  href={getLinkValue(info.type, info.value)}
+                                  key={index}
+                                  border="none"
+                                  display="block"
+                                >
+                                  <Image
+                                    htmlWidth="300"
+                                    htmlHeight="18"
+                                    src={info.img}
+                                  />
+                                </Link>
+                              </td>
+                            </tr>
+                          ))
+                      )}
+                    </tbody>
                   </Table>
                 </td>
               </tr>
-            </Tbody>
+            </tbody>
           </Table>
         </Td>
       );
@@ -194,8 +203,6 @@ export default function OutputBox(){
                       )}
                     </Box>
                   </Flex>
-                  {/* </Td> */}
-                  {/* <Td borderLeft="1px solid #ccc" p="0" borderBottom="none"> */}
                 </Td>
               </Tr>
             </Tbody>
@@ -214,12 +221,23 @@ export default function OutputBox(){
         border="1px solid #ccc"
       >
         {isComplete ? (
-         <>
-            <Table cellPadding="0" ref={contentRef} minH='200px' style={{'borderCollapse':"collapse"}} border='0' cellSpacing='0'>
-              <Tbody direction="row" height="150px" p="10px">
-                <Tr>{type === 'B' ? typeBOutput() : typeCOutput()}</Tr>
-              </Tbody>
-            </Table>
+          <>
+            <Box ref={contentRef}>
+              <Table
+                cellPadding="0"
+                ref={contentRef}
+                style={{
+                  borderCollapse: 'collapse',
+                  border: 0,
+                  minHeight: '200px',
+                }}
+                cellSpacing="0"
+              >
+                <tbody>
+                  <tr>{type === 'B' ? typeBOutput() : typeCOutput()}</tr>
+                </tbody>
+              </Table>
+            </Box>
             <Box textAlign="right" mr="20px">
               <IconButton
                 colorScheme="facebook"
@@ -230,8 +248,8 @@ export default function OutputBox(){
               />
             </Box>
           </>
-        ) :  (
-           <Flex justifyContent="center" alignItems="center" h="30%">
+        ) : (
+          <Flex justifyContent="center" alignItems="center" h="30%">
             <BeatLoader color="#1B4079" />
           </Flex>
         )}
