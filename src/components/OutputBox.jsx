@@ -198,17 +198,21 @@ export default function OutputBox(){
                       display="block"
                     />
                   </Link>
-                  <Table>
+                  <Table
+                    cellPadding="0"
+                    style={{ borderCollapse: 'collapse', border: 'none' }}
+                    cellSpacing="0"
+                  >
                     <tbody>
                       <tr>
                         <td
-                        // 這裡沒有margin 0.1 會多出額外的margin ！！
+                          // 這裡沒有margin 0.1 會多出額外的margin ！！
                           style={{
                             margin: '0.1px',
                             padding: '0',
                             border: 'none',
                             verticalAlign: 'top',
-                            width:'130',
+                            width: '130',
                             borderCollapse: 'collapse',
                           }}
                         >
@@ -219,65 +223,77 @@ export default function OutputBox(){
                         </td>
                         <td
                           style={{
-                            padding: '0',
+                            // paddingTop: '5px',
                             margin: '0.1px',
                             border: 'none',
                             borderCollapse: 'collapse',
+                            // verticalAlign:'top'
                           }}
                         >
                           <Table
                             cellPadding="0"
                             cellSpacing="0"
-                            style={{ borderCollapse: 'collapse', border:'none' }}
+                            style={{
+                              borderCollapse: 'collapse',
+                              border: 'none',
+                            }}
                           >
                             <tbody>
-                              {copyValue.map((info, index) => 
-                              info.img && 
-                                (info.type === InfoType.NORMAL ? (
-                                  <tr key={index}>
-                                    <td
-                                      style={{
-                                        margin: '0.1px',
-                                        padding: '0 0 0 0',
-                                        border: 'none',
-                                        borderCollapse: 'collapse',
-                                        height: '25',
-                                      }}
-                                    >
-                                      <Image
-                                        htmlWidth="280"
-                                        htmlHeight={info.columnName === '姓名' ? 24 : 15}
-                                        src={info.img}
-                                        key={index}
-                                      />
-                                    </td>
-                                  </tr>
-                                ) : (
-                                  <tr key={index}>
-                                    <td
-                                      style={{
-                                        margin: '0.1px',
-                                        padding: '0 0 0 0',
-                                        border: 'none',
-                                        borderCollapse: 'collapse',
-                                        // height: '1',
-                                      }}
-                                    >
-                                      <Link
-                                        href={getLinkValue(
-                                          info.type,
-                                          info.value
-                                        )}
-                                        key={index}
-                                        border="none"
-                                        display="block"
+                              {copyValue.map(
+                                (info, index) =>
+                                  info.img &&
+                                  (info.type === InfoType.NORMAL ? (
+                                    <tr key={index}>
+                                      <td
+                                        style={{
+                                          margin: '0.1px',
+                                          padding: '0px 0px 0px 0px',
+                                          border: 'none',
+                                          height:'25px',
+                                          borderCollapse: 'collapse',
+                                        }}
                                       >
-                                        <Image htmlWidth="280" htmlHeight="15" src={info.img} />
-                                      </Link>
-                                    </td>
-                                  </tr>
-                                )
-                              ))}
+                                        <Image
+                                          htmlWidth="280"
+                                          htmlHeight={
+                                            info.columnName === '姓名' ? 24 : 15
+                                          }
+                                          src={info.img}
+                                          key={index}
+                                        />
+                                      </td>
+                                    </tr>
+                                  ) : (
+                                    <tr key={index}>
+                                      <td
+                                        style={{
+                                          margin: '0.1px',
+                                          padding: '3px 0 0 0',
+                                          border: 'none',
+                                          borderCollapse: 'collapse',
+                                          display:'block'
+                                          // height: '1',
+                                        }}
+                                      >
+                                        <Link
+                                          href={getLinkValue(
+                                            info.type,
+                                            info.value
+                                          )}
+                                          key={index}
+                                          border="none"
+                                          display="block"
+                                        >
+                                          <Image
+                                            htmlWidth="280"
+                                            htmlHeight="15"
+                                            src={info.img}
+                                          />
+                                        </Link>
+                                      </td>
+                                    </tr>
+                                  ))
+                              )}
                             </tbody>
                           </Table>
                         </td>
