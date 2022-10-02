@@ -9,7 +9,6 @@ import { InfoType } from "../constants/InfoType";
 import { resetState } from "../redux/createSignatureSlice";
 
 export default function OutputBox(){
-    const myCVal = '6px';
 
     const { typeBCol, typeCCol } = useSelector((state) => state.signatureImg);
     const { isCreate, isDone } = useSelector((state) => state.createSignature);
@@ -173,7 +172,7 @@ export default function OutputBox(){
             style={{ borderCollapse: 'collapse', border: 'none' }}
             cellSpacing="0"
           >
-            <Tbody>
+            <tbody>
               <tr>
                 <td
                   bg="#fff"
@@ -182,7 +181,7 @@ export default function OutputBox(){
                     padding: 0,
                     border: 'none',
                     verticalAlign: 'top',
-                    width: 300,
+                    // width: 300,
                     display: 'block',
                     borderCollapse: 'collapse',
                   }}
@@ -203,25 +202,24 @@ export default function OutputBox(){
                     <tbody>
                       <tr>
                         <td
+                        // 這裡沒有margin 0.1 會多出額外的margin ！！
                           style={{
                             margin: '0.1px',
                             padding: '0',
                             border: 'none',
                             verticalAlign: 'top',
-                            display: 'block',
-                            width: '90',
+                            width:'130',
                             borderCollapse: 'collapse',
                           }}
                         >
                           <Image
-                            htmlWidth="20"
-                            htmlHeight="120"
+                            htmlWidth="18"
                             src={'https://i.imgur.com/ANllioi.png'}
                           />
                         </td>
                         <td
                           style={{
-                            padding: '0px 0px 10px 0px',
+                            padding: '0',
                             margin: '0.1px',
                             border: 'none',
                             borderCollapse: 'collapse',
@@ -230,23 +228,25 @@ export default function OutputBox(){
                           <Table
                             cellPadding="0"
                             cellSpacing="0"
-                            style={{ borderCollapse: 'collapse' }}
+                            style={{ borderCollapse: 'collapse', border:'none' }}
                           >
                             <tbody>
-                              {copyValue.map((info, index) =>
-                                info.type === InfoType.NORMAL ? (
+                              {copyValue.map((info, index) => 
+                              info.img && 
+                                (info.type === InfoType.NORMAL ? (
                                   <tr key={index}>
                                     <td
                                       style={{
                                         margin: '0.1px',
-                                        padding: '0px 0px 3px 5px',
+                                        padding: '0 0 0 0',
                                         border: 'none',
                                         borderCollapse: 'collapse',
-                                        height: '23',
+                                        height: '25',
                                       }}
                                     >
                                       <Image
-                                        htmlWidth="250"
+                                        htmlWidth="280"
+                                        htmlHeight={info.columnName === '姓名' ? 24 : 15}
                                         src={info.img}
                                         key={index}
                                       />
@@ -257,10 +257,10 @@ export default function OutputBox(){
                                     <td
                                       style={{
                                         margin: '0.1px',
-                                        padding: '3px 0px 0px 5px',
+                                        padding: '0 0 0 0',
                                         border: 'none',
                                         borderCollapse: 'collapse',
-                                        height: '23',
+                                        // height: '1',
                                       }}
                                     >
                                       <Link
@@ -272,12 +272,12 @@ export default function OutputBox(){
                                         border="none"
                                         display="block"
                                       >
-                                        <Image htmlWidth="250" src={info.img} />
+                                        <Image htmlWidth="280" htmlHeight="15" src={info.img} />
                                       </Link>
                                     </td>
                                   </tr>
                                 )
-                              )}
+                              ))}
                             </tbody>
                           </Table>
                         </td>
@@ -286,7 +286,7 @@ export default function OutputBox(){
                   </Table>
                 </td>
               </tr>
-            </Tbody>
+            </tbody>
           </Table>
         </Td>
       );
