@@ -309,14 +309,7 @@ export default function OutputBox(){
     }
     
     return (
-      <Box
-        w={[300, 400, 500]}
-        bg="#fff"
-        minHeight="500px"
-        m={{ md: '0 auto' }}
-        mt={{ md: '50px', sm: '50px' }}
-        border="1px solid #ccc"
-      >
+      <>
         {isComplete ? (
           <>
             <Box ref={contentRef}>
@@ -350,6 +343,7 @@ export default function OutputBox(){
             <BeatLoader color="#1B4079" />
           </Flex>
         )}
-      </Box>
+      </>
     );
+    
 }
