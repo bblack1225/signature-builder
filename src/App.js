@@ -4,6 +4,7 @@ import InputBox from './components/InputBox';
 import OutputBox from './components/OutputBox';
 import { useSelector } from 'react-redux';
 import OutputBoxC from './components/OutputBoxC';
+import OutputBoxB from './components/OutputBoxB';
 
 function App() {
 
@@ -26,9 +27,9 @@ function App() {
         mt={{ md: '50px', sm: '50px' }}
         border="1px solid #ccc"
       >
-        {type === 'B' ? 
-        <OutputBox /> :
-        <OutputBoxC />}
+        {type === 'B' 
+          ?  <OutputBoxB /> 
+          : <OutputBoxC />}
       </Box>
     </Box>
   );
