@@ -1,7 +1,6 @@
 import './App.css';
-import { Box } from '@chakra-ui/react';
+import { Box, Button, Flex } from '@chakra-ui/react';
 import InputBox from './components/InputBox';
-import OutputBox from './components/OutputBox';
 import { useSelector } from 'react-redux';
 import OutputBoxC from './components/OutputBoxC';
 import OutputBoxB from './components/OutputBoxB';
@@ -19,18 +18,32 @@ function App() {
       display={{ lg: 'flex' }}
     >
       <InputBox />
-      <Box
-        w={[300, 400, 500]}
-        bg="#fff"
-        minHeight="500px"
-        m={{ md: '0 auto' }}
-        mt={{ md: '50px', sm: '50px' }}
-        border="1px solid #ccc"
-      >
-        {type === 'B' 
-          ?  <OutputBoxB /> 
-          : <OutputBoxC />}
-      </Box>
+      {/* <Box> */}
+        {/* <Flex justifyContent="center" mt={{lg: 0, md:20, sm: '20'}}>
+          <Box px={3}>
+            <Button>Gmail</Button>
+          </Box>
+          <Box px={3}>
+            <Button>Apple Mail</Button>
+          </Box>
+          <Box px={3}>
+            <Button>Outlooks</Button>
+          </Box>
+          <Box px={3}>
+            <Button>Default</Button>
+          </Box>
+        </Flex> */}
+        <Box
+          w={[300, 400, 500]}
+          bg="#fff"
+          minHeight="500px"
+          m={{ md: '0 auto' }}
+          mt={{ md: '50px', sm: '50px' }}
+          border="1px solid #ccc"
+        >
+          {type === 'B' ? <OutputBoxB /> : <OutputBoxC />}
+        </Box>
+      {/* </Box> */}
     </Box>
   );
 }
