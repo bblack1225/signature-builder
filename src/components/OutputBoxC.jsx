@@ -96,7 +96,6 @@ export default function OutputBoxC() {
                   <Image
                     src={IMAGE_C_URL}
                     htmlWidth="300"
-                    htmlHeight="21"
                     ml="0px"
                     display="block"
                   />
@@ -115,22 +114,19 @@ export default function OutputBoxC() {
                           padding: '0',
                           border: 'none',
                           verticalAlign: 'top',
-                          width: '130',
                           borderCollapse: 'collapse',
                         }}
                       >
                         <Image
-                          htmlWidth="18"
+                          htmlWidth="20"
                           src={'https://i.imgur.com/ANllioi.png'}
                         />
                       </td>
                       <td
                         style={{
-                          // paddingTop: '5px',
-                          margin: '0.1px',
+                          margin: '0.1',
                           border: 'none',
                           borderCollapse: 'collapse',
-                          // verticalAlign:'top'
                         }}
                       >
                         <Table
@@ -149,17 +145,17 @@ export default function OutputBoxC() {
                                   <tr key={index}>
                                     <td
                                       style={{
-                                        margin: '0.1px',
-                                        padding: '0px 0px 0px 0px',
+                                        margin: '0.1',
+                                        padding:'0px',
                                         border: 'none',
-                                        height: '25px',
+                                        height:
+                                          info.columnName === '姓名' ? 32 : 21,
                                         borderCollapse: 'collapse',
                                       }}
                                     >
                                       <Image
-                                        htmlWidth="280"
-                                        htmlHeight={
-                                          info.columnName === '姓名' ? 24 : 15
+                                        htmlWidth={
+                                          info.columnName === '姓名' ? 280 : 300
                                         }
                                         src={info.img}
                                         key={index}
@@ -171,28 +167,27 @@ export default function OutputBoxC() {
                                     <td
                                       style={{
                                         margin: '0.1px',
-                                        padding: '3px 0 0 0',
+                                        padding:'0px',
                                         border: 'none',
                                         borderCollapse: 'collapse',
                                         display: 'block',
-                                        // height: '1',
+                                        height:21
                                       }}
                                     >
-                                      <Link
-                                        href={getLinkValue(
-                                          info.type,
-                                          info.value
-                                        )}
-                                        key={index}
-                                        border="none"
-                                        display="block"
-                                      >
-                                        <Image
-                                          htmlWidth="280"
-                                          htmlHeight="15"
-                                          src={info.img}
-                                        />
-                                      </Link>
+                                        <Link
+                                          href={getLinkValue(
+                                            info.type,
+                                            info.value
+                                          )}
+                                          key={index}
+                                          border="none"
+                                          display="block"
+                                        >
+                                          <Image
+                                            htmlWidth="300"
+                                            src={info.img}
+                                          />
+                                        </Link>
                                     </td>
                                   </tr>
                                 ))
