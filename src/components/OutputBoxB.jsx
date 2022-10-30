@@ -16,32 +16,6 @@ import { IMAGE_B_URL } from '../constants/imageUrl';
 import { InfoType } from '../constants/InfoType';
 import { resetState } from '../redux/createSignatureSlice';
 
-const GMAIL_TYPE_B_FIRST_TD_STYLE = {
-      margin: '0.1px',
-      padding: '0px 10px 0px 0px',
-      border: 'none',
-      verticalAlign: 'top',
-      display: 'block',
-      width: '90',
-      borderCollapse: 'collapse',
-};
-
-const GMAIL_TYPE_B_NORMAL_TD_STYLE = {
-    margin: '0.1px',
-    padding: '5px 0px 5px 10px',
-    border: 'none',
-    borderCollapse: 'collapse',
-    height: '23',
-};
-
-const GMAIL_TYPE_B_LINK_TD_STYLE = {
-  margin: '0.1px',
-  padding: '5px 0px 3px 7px',
-  border: 'none',
-  borderCollapse: 'collapse',
-  height: '23',
-};
-
 export default function OutputBoxB() {
   const { typeBCol } = useSelector((state) => state.signatureImg);
   const { isCreate, isDone } = useSelector((state) => state.createSignature);
@@ -102,7 +76,18 @@ export default function OutputBoxB() {
         >
           <tbody>
             <tr>
-              <td style={GMAIL_TYPE_B_FIRST_TD_STYLE}>
+              <td
+                style={{
+                  margin: '0.1px',
+                  padding: '0px 10px 0px 0px',
+                  border: 'none',
+                  verticalAlign: 'top',
+                  display: 'block',
+                  width: '90',
+                  height:'90',
+                  borderCollapse: 'collapse',
+                }}
+              >
                 <Link href="https://www.infolink-group.com/" border="none">
                   <Image htmlWidth="90" src={IMAGE_B_URL} display="block" />
                 </Link>
@@ -125,12 +110,17 @@ export default function OutputBoxB() {
                         info.img &&
                         (info.type === InfoType.NORMAL ? (
                           <tr key={index}>
-                            <td style={GMAIL_TYPE_B_NORMAL_TD_STYLE}>
+                            <td
+                              style={{
+                                margin: '0.1px',
+                                padding: '0px 0px 0px 5px',
+                                border: 'none',
+                                borderCollapse: 'collapse',
+                                height: 28,
+                              }}
+                            >
                               <Image
                                 htmlWidth="300"
-                                htmlHeight={
-                                  info.columnName === '姓名' ? '21' : '18'
-                                }
                                 src={info.img}
                                 key={index}
                               />
@@ -138,18 +128,22 @@ export default function OutputBoxB() {
                           </tr>
                         ) : (
                           <tr key={index}>
-                            <td style={GMAIL_TYPE_B_LINK_TD_STYLE}>
+                            <td
+                              style={{
+                                margin: '0.1px',
+                                padding: '0px 0px 0px 3px',
+                                border: 'none',
+                                borderCollapse: 'collapse',
+                                height: 28,
+                              }}
+                            >
                               <Link
                                 href={getLinkValue(info.type, info.value)}
                                 key={index}
                                 border="none"
                                 display="block"
                               >
-                                <Image
-                                  htmlWidth="300"
-                                  htmlHeight="18"
-                                  src={info.img}
-                                />
+                                <Image htmlWidth="300" src={info.img} />
                               </Link>
                             </td>
                           </tr>
