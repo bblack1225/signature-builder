@@ -1,5 +1,4 @@
-import './App.css';
-import { Box, Button, Flex } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import InputBox from './components/InputBox';
 import { useSelector } from 'react-redux';
 import OutputBoxC from './components/OutputBoxC';
@@ -18,21 +17,6 @@ function App() {
       display={{ lg: 'flex' }}
     >
       <InputBox />
-      {/* <Box> */}
-        {/* <Flex justifyContent="center" mt={{lg: 0, md:20, sm: '20'}}>
-          <Box px={3}>
-            <Button>Gmail</Button>
-          </Box>
-          <Box px={3}>
-            <Button>Apple Mail</Button>
-          </Box>
-          <Box px={3}>
-            <Button>Outlooks</Button>
-          </Box>
-          <Box px={3}>
-            <Button>Default</Button>
-          </Box>
-        </Flex> */}
         <Box
           w={[300, 400, 500]}
           bg="#fff"
@@ -43,7 +27,6 @@ function App() {
         >
           {type === 'B' ? <OutputBoxB /> : <OutputBoxC />}
         </Box>
-      {/* </Box> */}
     </Box>
   );
 }

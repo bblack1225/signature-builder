@@ -107,10 +107,6 @@ const initialState = {
       isDisabled: false,
     },
   ],
-  logoForm: {
-    img: '',
-    value: 'https://www.infolink-group.com/',
-  },
 };
 
 export const signatureImgSlice = createSlice({
@@ -148,18 +144,11 @@ export const signatureImgSlice = createSlice({
           ...form,
         };
       }
-    },
-    updateLogoColumn: (state, action) => {
-      const { img } = action.payload;
-      state.logoForm = {
-        ...state.logoForm,
-        img,
-      };
-    },
+    }
   },
 });
 
-export const { insertColumn, deleteColumn, updateColumn, updateLogoColumn } =
+export const { insertColumn, deleteColumn, updateColumn } =
   signatureImgSlice.actions;
 
 export default signatureImgSlice.reducer;

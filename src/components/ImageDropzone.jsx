@@ -15,7 +15,6 @@ function ImageDropzone({ colHeight, colWidth, colId}) {
   const dispatch = useDispatch();
 
   const [selectedImage, setSelectImage] = useState('');
-  const [isError, setIsError] = useState(false);
 
   const onDrop = useCallback((acceptedFiles) => {
       dispatch(createSignature());
@@ -47,10 +46,6 @@ function ImageDropzone({ colHeight, colWidth, colId}) {
     },
     [type]
   );
-
-  const triggerComplete = () => {
-    dispatch(createSignature(false))
-  }
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,

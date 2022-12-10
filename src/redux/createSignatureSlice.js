@@ -1,9 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-    isUploading: false,
-    isCreate: false,
-    isDone: false,
+    isLoading: false,
 }
 
 export const createSignatureSlice = createSlice({
@@ -11,27 +9,16 @@ export const createSignatureSlice = createSlice({
     initialState,
     reducers: {
         createSignature: (state) => {
-            state.isCreate = true;
-        },
-        completeSignature:(state) => {
-            state.isCreate = false;
-        },
-        uploadSignatureImage: (state) => {
-            state.isUploading = false;
+            state.isLoading = true;
         },
         completeUploadSignatureImage: (state) => {
-            state.isDone = true;
+            state.isLoading = false;
         },
-        resetState: (state) => {
-            state.isCreate = false;
-            state.isDone = false;
-            state.isUploading = false;
-        }
     }
 })
 
 
-export const { createSignature, completeSignature, uploadSignatureImage, completeUploadSignatureImage, resetState } =
+export const { createSignature, completeUploadSignatureImage, resetState } =
   createSignatureSlice.actions;
 
 export default createSignatureSlice.reducer;

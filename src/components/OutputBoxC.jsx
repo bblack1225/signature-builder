@@ -9,19 +9,14 @@ import {
   Td,
 } from '@chakra-ui/react';
 import React, { useRef } from 'react';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { BeatLoader } from 'react-spinners';
 import { IMAGE_C_URL } from '../constants/imageUrl';
 import { InfoType } from '../constants/InfoType';
-import { resetState } from '../redux/createSignatureSlice';
 
 export default function OutputBoxC() {
   const { typeCCol } = useSelector((state) => state.signatureImg);
-  const { isCreate, isDone } = useSelector((state) => state.createSignature);
-  const dispatch = useDispatch();
-
-  const [isComplete, setIsComplete] = useState(true);
+  const { isLoading } = useSelector((state) => state.createSignature);
   const contentRef = useRef(null);
 
   const handleCopy = () => {
@@ -42,19 +37,6 @@ export default function OutputBoxC() {
     }
     sel.removeAllRanges();
   };
-
-  useEffect(() => {
-    if (isCreate) {
-      setIsComplete(false);
-    }
-  }, [isCreate]);
-
-  useEffect(() => {
-    if (isDone) {
-      setIsComplete(true);
-      dispatch(resetState());
-    }
-  }, [isDone]);
 
   const getLinkValue = (type, value) => {
     if (type === InfoType.PHONE) {
@@ -84,8 +66,6 @@ export default function OutputBoxC() {
                   padding: 0,
                   border: 'none',
                   verticalAlign: 'top',
-                  // width: 300,
-                  display: 'block',
                   borderCollapse: 'collapse',
                 }}
               >
@@ -146,7 +126,7 @@ export default function OutputBoxC() {
                                     <td
                                       style={{
                                         margin: '0.1',
-                                        padding:'0px',
+                                        padding: '0px',
                                         border: 'none',
                                         height:
                                           info.columnName === '姓名' ? 32 : 21,
@@ -167,27 +147,24 @@ export default function OutputBoxC() {
                                     <td
                                       style={{
                                         margin: '0.1px',
-                                        padding:'0px',
+                                        padding: '0px',
                                         border: 'none',
                                         borderCollapse: 'collapse',
                                         display: 'block',
-                                        height:21
+                                        height: 21,
                                       }}
                                     >
-                                        <Link
-                                          href={getLinkValue(
-                                            info.type,
-                                            info.value
-                                          )}
-                                          key={index}
-                                          border="none"
-                                          display="block"
-                                        >
-                                          <Image
-                                            htmlWidth="300"
-                                            src={info.img}
-                                          />
-                                        </Link>
+                                      <Link
+                                        href={getLinkValue(
+                                          info.type,
+                                          info.value
+                                        )}
+                                        key={index}
+                                        border="none"
+                                        display="block"
+                                      >
+                                        <Image htmlWidth="300" src={info.img} />
+                                      </Link>
                                     </td>
                                   </tr>
                                 ))
@@ -208,7 +185,11 @@ export default function OutputBoxC() {
 
   return (
     <>
-      {isComplete ? (
+      {isLoading ? (
+        <Flex justifyContent="center" alignItems="center" h="30%">
+          <BeatLoader color="#1B4079" />
+        </Flex>
+      ) : (
         <>
           <Box ref={contentRef}>
             <Table
@@ -236,10 +217,6 @@ export default function OutputBoxC() {
             />
           </Box>
         </>
-      ) : (
-        <Flex justifyContent="center" alignItems="center" h="30%">
-          <BeatLoader color="#1B4079" />
-        </Flex>
       )}
     </>
   );

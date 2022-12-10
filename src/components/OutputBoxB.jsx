@@ -9,19 +9,15 @@ import {
   Td
 } from '@chakra-ui/react';
 import React, { useRef } from 'react';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { BeatLoader } from 'react-spinners';
 import { IMAGE_B_URL } from '../constants/imageUrl';
 import { InfoType } from '../constants/InfoType';
-import { resetState } from '../redux/createSignatureSlice';
 
 export default function OutputBoxB() {
   const { typeBCol } = useSelector((state) => state.signatureImg);
-  const { isCreate, isDone } = useSelector((state) => state.createSignature);
-  const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.createSignature);
 
-  const [isComplete, setIsComplete] = useState(true);
   const contentRef = useRef(null);
 
   const handleCopy = () => {
@@ -42,19 +38,6 @@ export default function OutputBoxB() {
     }
     sel.removeAllRanges();
   };
-
-  useEffect(() => {
-    if (isCreate) {
-      setIsComplete(false);
-    }
-  }, [isCreate]);
-
-  useEffect(() => {
-    if (isDone) {
-      setIsComplete(true);
-      dispatch(resetState());
-    }
-  }, [isDone]);
 
   const getLinkValue = (type, value) => {
     if (type === InfoType.PHONE) {
@@ -162,7 +145,11 @@ export default function OutputBoxB() {
 
   return (
     <>
-      {isComplete ? (
+      {isLoading ? (
+        <Flex justifyContent="center" alignItems="center" h="30%">
+          <BeatLoader color="#1B4079" />
+        </Flex>
+      ) : (
         <>
           <Box ref={contentRef}>
             <Table
@@ -190,10 +177,6 @@ export default function OutputBoxB() {
             />
           </Box>
         </>
-      ) : (
-        <Flex justifyContent="center" alignItems="center" h="30%">
-          <BeatLoader color="#1B4079" />
-        </Flex>
       )}
     </>
   );

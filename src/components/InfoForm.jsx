@@ -63,13 +63,6 @@ const handleColValueChange = (e, id) => {
   dispatch(updateColumn(data));
 };
 
-// const handleCreateSignature = () => {
-//   dispatch(createSignature())
-//   setTimeout(() => {
-//     dispatch(completeUploadSignatureImage());
-//   },500)
-// }
-
   return (
     <>
       <Flex flexDir="column">
