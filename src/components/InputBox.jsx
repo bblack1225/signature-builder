@@ -8,7 +8,7 @@ const InputBox = () => {
 
     const dispatch = useDispatch();
     const handleTabChange = (index) => {
-      const type = index == 0 ? 'B' : 'C';
+      const type = index === 0 ? 'B' : 'C';
       dispatch(setSignatureType(type));
     }
 

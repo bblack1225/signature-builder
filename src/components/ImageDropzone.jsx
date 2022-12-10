@@ -44,7 +44,7 @@ function ImageDropzone({ colHeight, colWidth, colId}) {
           alert("上傳照片發生錯誤，請稍後再試！")
         });
     },
-    [type]
+    [type, colId]
   );
 
   const { getRootProps, getInputProps } = useDropzone({
