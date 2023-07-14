@@ -1,4 +1,4 @@
-import { CopyIcon } from '@chakra-ui/icons';
+import { CopyIcon } from "@chakra-ui/icons";
 import {
   Box,
   Flex,
@@ -7,18 +7,18 @@ import {
   Link,
   Table,
   Td,
-} from '@chakra-ui/react';
-import React, { useRef } from 'react';
-import { useSelector } from 'react-redux';
-import { BeatLoader } from 'react-spinners';
-import { IMAGE_C_URL } from '../constants/imageUrl';
-import { InfoType } from '../constants/InfoType';
+} from "@chakra-ui/react";
+import React, { useRef } from "react";
+import { useSelector } from "react-redux";
+import { BeatLoader } from "react-spinners";
+import { IMAGE_C_URL } from "../constants/imageUrl";
+import { InfoType } from "../constants/InfoType";
 
 export default function OutputBoxC() {
   const { typeCCol } = useSelector((state) => state.signatureImg);
   const { isLoading } = useSelector((state) => state.createSignature);
   const contentRef = useRef(null);
-
+  console.log("outputboxC");
   const handleCopy = () => {
     const signatureTable = contentRef.current;
     let range, sel;
@@ -33,7 +33,7 @@ export default function OutputBoxC() {
         range.selectNode(signatureTable);
         sel.addRange(range);
       }
-      document.execCommand('copy');
+      document.execCommand("copy");
     }
     sel.removeAllRanges();
   };
@@ -48,13 +48,12 @@ export default function OutputBoxC() {
     }
   };
 
-
   const typeCOutput = () => {
     return (
-      <Td style={{ border: 'none' }}>
+      <Td style={{ border: "none" }}>
         <Table
           cellPadding="0"
-          style={{ borderCollapse: 'collapse', border: 'none' }}
+          style={{ borderCollapse: "collapse", border: "none" }}
           cellSpacing="0"
         >
           <tbody>
@@ -62,16 +61,16 @@ export default function OutputBoxC() {
               <td
                 bg="#fff"
                 style={{
-                  margin: '0.1px',
+                  margin: "0.1px",
                   padding: 0,
-                  border: 'none',
-                  verticalAlign: 'top',
-                  borderCollapse: 'collapse',
+                  border: "none",
+                  verticalAlign: "top",
+                  borderCollapse: "collapse",
                 }}
               >
                 <Link
                   href="https://www.reccessary.com/en"
-                  style={{ border: 'none' }}
+                  style={{ border: "none" }}
                 >
                   <Image
                     src={IMAGE_C_URL}
@@ -82,7 +81,7 @@ export default function OutputBoxC() {
                 </Link>
                 <Table
                   cellPadding="0"
-                  style={{ borderCollapse: 'collapse', border: 'none' }}
+                  style={{ borderCollapse: "collapse", border: "none" }}
                   cellSpacing="0"
                 >
                   <tbody>
@@ -90,31 +89,31 @@ export default function OutputBoxC() {
                       <td
                         // 這裡沒有margin 0.1 會多出額外的margin ！！
                         style={{
-                          margin: '0.1px',
-                          padding: '0',
-                          border: 'none',
-                          verticalAlign: 'top',
-                          borderCollapse: 'collapse',
+                          margin: "0.1px",
+                          padding: "0",
+                          border: "none",
+                          verticalAlign: "top",
+                          borderCollapse: "collapse",
                         }}
                       >
                         <Image
                           htmlWidth="20"
-                          src={'https://i.imgur.com/ANllioi.png'}
+                          src={"https://i.imgur.com/ANllioi.png"}
                         />
                       </td>
                       <td
                         style={{
-                          margin: '0.1',
-                          border: 'none',
-                          borderCollapse: 'collapse',
+                          margin: "0.1",
+                          border: "none",
+                          borderCollapse: "collapse",
                         }}
                       >
                         <Table
                           cellPadding="0"
                           cellSpacing="0"
                           style={{
-                            borderCollapse: 'collapse',
-                            border: 'none',
+                            borderCollapse: "collapse",
+                            border: "none",
                           }}
                         >
                           <tbody>
@@ -125,17 +124,17 @@ export default function OutputBoxC() {
                                   <tr key={index}>
                                     <td
                                       style={{
-                                        margin: '0.1',
-                                        padding: '0px',
-                                        border: 'none',
+                                        margin: "0.1",
+                                        padding: "0px",
+                                        border: "none",
                                         height:
-                                          info.columnName === '姓名' ? 32 : 21,
-                                        borderCollapse: 'collapse',
+                                          info.columnName === "姓名" ? 32 : 21,
+                                        borderCollapse: "collapse",
                                       }}
                                     >
                                       <Image
                                         htmlWidth={
-                                          info.columnName === '姓名' ? 280 : 300
+                                          info.columnName === "姓名" ? 280 : 300
                                         }
                                         src={info.img}
                                         key={index}
@@ -146,11 +145,11 @@ export default function OutputBoxC() {
                                   <tr key={index}>
                                     <td
                                       style={{
-                                        margin: '0.1px',
-                                        padding: '0px',
-                                        border: 'none',
-                                        borderCollapse: 'collapse',
-                                        display: 'block',
+                                        margin: "0.1px",
+                                        padding: "0px",
+                                        border: "none",
+                                        borderCollapse: "collapse",
+                                        display: "block",
                                         height: 21,
                                       }}
                                     >
@@ -196,9 +195,9 @@ export default function OutputBoxC() {
               cellPadding="0"
               ref={contentRef}
               style={{
-                borderCollapse: 'collapse',
+                borderCollapse: "collapse",
                 border: 0,
-                minHeight: '200px',
+                minHeight: "200px",
               }}
               cellSpacing="0"
             >

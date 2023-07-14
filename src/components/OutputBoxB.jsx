@@ -1,4 +1,4 @@
-import { CopyIcon } from '@chakra-ui/icons';
+import { CopyIcon } from "@chakra-ui/icons";
 import {
   Box,
   Flex,
@@ -6,19 +6,20 @@ import {
   Image,
   Link,
   Table,
-  Td
-} from '@chakra-ui/react';
-import React, { useRef } from 'react';
-import { useSelector } from 'react-redux';
-import { BeatLoader } from 'react-spinners';
-import { IMAGE_B_URL } from '../constants/imageUrl';
-import { InfoType } from '../constants/InfoType';
+  Td,
+} from "@chakra-ui/react";
+import React, { useRef } from "react";
+import { useSelector } from "react-redux";
+import { BeatLoader } from "react-spinners";
+import { IMAGE_B_URL } from "../constants/imageUrl";
+import { InfoType } from "../constants/InfoType";
 
 export default function OutputBoxB() {
   const { typeBCol } = useSelector((state) => state.signatureImg);
   const { isLoading } = useSelector((state) => state.createSignature);
 
   const contentRef = useRef(null);
+  console.log("outputboxB");
 
   const handleCopy = () => {
     const signatureTable = contentRef.current;
@@ -34,7 +35,7 @@ export default function OutputBoxB() {
         range.selectNode(signatureTable);
         sel.addRange(range);
       }
-      document.execCommand('copy');
+      document.execCommand("copy");
     }
     sel.removeAllRanges();
   };
@@ -51,24 +52,24 @@ export default function OutputBoxB() {
 
   const typeBOutput = () => {
     return (
-      <Td style={{ border: 'none' }}>
+      <Td style={{ border: "none" }}>
         <Table
           cellPadding="0"
-          style={{ borderCollapse: 'collapse', border: 0 }}
+          style={{ borderCollapse: "collapse", border: 0 }}
           cellSpacing="0"
         >
           <tbody>
             <tr>
               <td
                 style={{
-                  margin: '0.1px',
-                  padding: '0px 10px 0px 0px',
-                  border: 'none',
-                  verticalAlign: 'top',
-                  display: 'block',
-                  width: '90',
-                  height:'90',
-                  borderCollapse: 'collapse',
+                  margin: "0.1px",
+                  padding: "0px 10px 0px 0px",
+                  border: "none",
+                  verticalAlign: "top",
+                  display: "block",
+                  width: "90",
+                  height: "90",
+                  borderCollapse: "collapse",
                 }}
               >
                 <Link href="https://www.infolink-group.com/" border="none">
@@ -78,14 +79,14 @@ export default function OutputBoxB() {
               <td
                 style={{
                   padding: 0,
-                  border: 'none',
-                  borderLeft: '1px solid #ccc',
+                  border: "none",
+                  borderLeft: "1px solid #ccc",
                 }}
               >
                 <Table
                   cellPadding="0"
                   cellSpacing="0"
-                  style={{ borderCollapse: 'collapse', border: 'none' }}
+                  style={{ borderCollapse: "collapse", border: "none" }}
                 >
                   <tbody>
                     {typeBCol.map(
@@ -95,10 +96,10 @@ export default function OutputBoxB() {
                           <tr key={index}>
                             <td
                               style={{
-                                margin: '0.1px',
-                                padding: '0px 0px 0px 5px',
-                                border: 'none',
-                                borderCollapse: 'collapse',
+                                margin: "0.1px",
+                                padding: "0px 0px 0px 5px",
+                                border: "none",
+                                borderCollapse: "collapse",
                                 height: 28,
                               }}
                             >
@@ -113,10 +114,10 @@ export default function OutputBoxB() {
                           <tr key={index}>
                             <td
                               style={{
-                                margin: '0.1px',
-                                padding: '0px 0px 0px 3px',
-                                border: 'none',
-                                borderCollapse: 'collapse',
+                                margin: "0.1px",
+                                padding: "0px 0px 0px 3px",
+                                border: "none",
+                                borderCollapse: "collapse",
                                 height: 28,
                               }}
                             >
@@ -142,7 +143,6 @@ export default function OutputBoxB() {
     );
   };
 
-
   return (
     <>
       {isLoading ? (
@@ -156,9 +156,9 @@ export default function OutputBoxB() {
               cellPadding="0"
               ref={contentRef}
               style={{
-                borderCollapse: 'collapse',
+                borderCollapse: "collapse",
                 border: 0,
-                minHeight: '200px',
+                minHeight: "200px",
               }}
               cellSpacing="0"
             >
