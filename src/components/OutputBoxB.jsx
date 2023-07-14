@@ -19,7 +19,6 @@ export default function OutputBoxB() {
   const { isLoading } = useSelector((state) => state.createSignature);
 
   const contentRef = useRef(null);
-  console.log("outputboxB");
 
   const handleCopy = () => {
     const signatureTable = contentRef.current;

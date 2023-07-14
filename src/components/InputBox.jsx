@@ -19,8 +19,6 @@ const InputBox = () => {
     dispatch(setSignatureType(type));
   };
 
-  console.log("in box");
-
   return (
     <Box
       w={[400, 500, 600]}
@@ -29,7 +27,7 @@ const InputBox = () => {
       mb={{ md: 10 }}
       m={{ md: "0 auto" }}
     >
-      <Tabs size="lg" onChange={handleTabChange}>
+      <Tabs size="lg" onChange={handleTabChange} isLazy>
         <TabList bg="#e6edf5" borderRadius="10px">
           <Tab
             w="50%"

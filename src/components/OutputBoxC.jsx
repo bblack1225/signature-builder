@@ -18,7 +18,6 @@ export default function OutputBoxC() {
   const { typeCCol } = useSelector((state) => state.signatureImg);
   const { isLoading } = useSelector((state) => state.createSignature);
   const contentRef = useRef(null);
-  console.log("outputboxC");
   const handleCopy = () => {
     const signatureTable = contentRef.current;
     let range, sel;

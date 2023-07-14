@@ -21,7 +21,6 @@ import {
 import { useRef, useState } from "react";
 import { InfoType } from "../constants/InfoType";
 import { DeleteIcon, AddIcon } from "@chakra-ui/icons";
-import { useEffect } from "react";
 import ImageDropzone from "./ImageDropzone";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -34,16 +33,7 @@ export default function InfoForm() {
   const { typeBCol, typeCCol } = useSelector((state) => state.signatureImg);
   const { type } = useSelector((state) => state.signatureType);
   const dispatch = useDispatch();
-
-  const [insertForm, setInsertForm] = useState({
-    columnName: "",
-    columnType: "",
-  });
-
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const initialRef = useRef(null);
-  const finalRef = useRef(null);
 
   const infos = type === "B" ? typeBCol : typeCCol;
 
@@ -52,7 +42,7 @@ export default function InfoForm() {
     dispatch(deleteColumn(data));
   };
 
-  const handleInsertForm = () => {
+  const handleInsertForm = (insertForm) => {
     const colInfo = Object.values(InfoType).find(
       (type) => type.value === insertForm.columnType
     );
@@ -67,10 +57,6 @@ export default function InfoForm() {
     };
     const data = { type, form };
     dispatch(insertColumn(data));
-    setInsertForm({
-      columnName: "",
-      columnType: "",
-    });
     onClose();
   };
 
@@ -162,60 +148,79 @@ export default function InfoForm() {
           </Box> */}
         </Flex>
       </Flex>
-      {/* )} */}
-      <Modal
-        initialFocusRef={initialRef}
-        finalFocusRef={finalRef}
+      <InsertFormModal
+        key={type}
+        onSave={handleInsertForm}
+        onOpen={onOpen}
         isOpen={isOpen}
         onClose={onClose}
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>新增欄位</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
-            <FormControl>
-              <Input
-                ref={initialRef}
-                placeholder="欄位名稱"
-                onChange={(e) =>
-                  setInsertForm((prev) => ({
-                    ...prev,
-                    columnName: e.target.value,
-                  }))
-                }
-              />
-            </FormControl>
-
-            <FormControl mt={4}>
-              <Select
-                placeholder="欄位種類"
-                onChange={(e) =>
-                  setInsertForm((prev) => ({
-                    ...prev,
-                    columnType: e.target.value,
-                  }))
-                }
-              >
-                {Object.keys(InfoType).map((key) => {
-                  return (
-                    <option key={key} value={InfoType[key].value}>
-                      {InfoType[key].label}
-                    </option>
-                  );
-                })}
-              </Select>
-            </FormControl>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={handleInsertForm}>
-              Save
-            </Button>
-            <Button onClick={onClose}>Cancel</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      />
     </>
+  );
+}
+
+function InsertFormModal({ onSave, isOpen, onClose }) {
+  const [insertForm, setInsertForm] = useState({
+    columnName: "",
+    columnType: "",
+  });
+
+  const initialRef = useRef(null);
+  const finalRef = useRef(null);
+
+  return (
+    <Modal
+      initialFocusRef={initialRef}
+      finalFocusRef={finalRef}
+      isOpen={isOpen}
+      onClose={onClose}
+    >
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>新增欄位</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody pb={6}>
+          <FormControl>
+            <Input
+              ref={initialRef}
+              placeholder="欄位名稱"
+              onChange={(e) =>
+                setInsertForm((prev) => ({
+                  ...prev,
+                  columnName: e.target.value,
+                }))
+              }
+            />
+          </FormControl>
+
+          <FormControl mt={4}>
+            <Select
+              placeholder="欄位種類"
+              onChange={(e) =>
+                setInsertForm((prev) => ({
+                  ...prev,
+                  columnType: e.target.value,
+                }))
+              }
+            >
+              {Object.keys(InfoType).map((key) => {
+                return (
+                  <option key={key} value={InfoType[key].value}>
+                    {InfoType[key].label}
+                  </option>
+                );
+              })}
+            </Select>
+          </FormControl>
+        </ModalBody>
+
+        <ModalFooter>
+          <Button colorScheme="blue" mr={3} onClick={() => onSave(insertForm)}>
+            Save
+          </Button>
+          <Button onClick={onClose}>Cancel</Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   );
 }
